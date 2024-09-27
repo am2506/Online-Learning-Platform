@@ -169,7 +169,7 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Course", b =>
@@ -208,7 +208,7 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Enrollment", b =>
@@ -232,7 +232,7 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Enrollments");
+                    b.ToTable("Enrollments", (string)null);
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Lesson", b =>
@@ -251,7 +251,7 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lessons", (string)null);
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.UserBase", b =>
