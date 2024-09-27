@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Online_Learning_Platform.Models.Data;
+using Online_Learning_Platform.Repository;
+using Online_Learning_Platform.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<Icources, CourseRepository>();
 
 // Add DbContext Connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

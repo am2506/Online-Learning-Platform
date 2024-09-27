@@ -1,0 +1,26 @@
+﻿@model List<Course>
+
+<a asp-action="Add" asp-controller="Course" class="btn btn-success">Create</a>
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Duration</th>
+        <th>Time of Lecture</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.Duration</td>
+            <td>@item.TotalLecture</td>
+           
+        </tr>
+    }
+
+
+
+</table>

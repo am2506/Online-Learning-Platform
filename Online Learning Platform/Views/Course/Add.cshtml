@@ -1,0 +1,55 @@
+﻿
+@model Course
+
+@{
+    SelectList catitems = new SelectList(ViewBag.category, "Id", "Name");
+   
+}
+
+<form asp-action="SaveAdd" asp-controller="Course" method="post" enctype="multipart/form-data" >
+    <div asp-validation-summary="All"></div>
+    <div class="form form-group">
+        <label asp-for="@Model.Title">Course Name</label>
+        <input asp-for="@Model.Title" class="form-control" />
+    </div>
+
+    <div class="form form-group">
+        <label asp-for="@Model.Description">Description</label>
+        <input asp-for="@Model.Description" class="form-control" />
+    </div>
+
+    <div class="form form-group">
+        <label asp-for="@Model.Duration">Duration</label>
+        <input asp-for="@Model.Duration" class="form-control" />
+    </div>
+
+    <div class="form form-group">
+        <label asp-for="@Model.TotalLecture">Time of Lecture</label>
+        <input asp-for="@Model.TotalLecture" class="form-control" />
+            
+    </div>
+
+    <div class="form form-group">
+        <label asp-for="@Model.CategoryId">Category</label>
+        <select asp-for="@Model.CategoryId" asp-items="catitems" class="form-control">
+            <option selected value="0">-------Select a Category</option>
+        </select>
+    </div>
+
+    
+
+
+   
+
+    <div class="form form-group">
+        <label asp-for="@Model.ImageUrl">Upload Image</label>
+        <input type="file" asp-for="@Model.ImageUrl" class="form-control" />
+    </div>
+
+    
+
+    <input type="submit" value="Save" class="btn btn-success" />
+
+
+</form>
+
