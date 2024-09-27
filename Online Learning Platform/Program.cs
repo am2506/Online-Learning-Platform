@@ -1,9 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Online_Learning_Platform.Models.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add DbContext Connection
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//Console.WriteLine($"{builder.Configuration.GetConnectionString("DefaultConnection")}");
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
