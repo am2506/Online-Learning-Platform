@@ -1,8 +1,8 @@
 ﻿namespace Online_Learning_Platform.Models
 {
-	public class Lesson
+	public class Lesson : BaseEntity
 	{
-		public int Id { get; set; }
+		
 		public int CourseId { get; set; }
 		public string VideoUrl { get; set; }
 

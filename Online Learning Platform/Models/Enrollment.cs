@@ -1,8 +1,8 @@
 ﻿namespace Online_Learning_Platform.Models
 {
-	public class Enrollment
+	public class Enrollment : BaseEntity
 	{
-		public int Id { get; set; }
+		
 		public int CourseId { get; set; }
 		public int StudentId { get; set; }
 		public int Prograss { get; set; }
