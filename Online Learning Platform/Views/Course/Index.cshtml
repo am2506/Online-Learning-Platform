@@ -1,80 +1,64 @@
-﻿@model IEnumerable<Course>
+﻿ @model IEnumerable<Course>
+
+<link rel="stylesheet" type="text/css" href="~/styles/courses_styles.css">
+<link rel="stylesheet" type="text/css" href="~/styles/courses_responsive.css">
+
+<div class="super_container">
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>ECOURSES - Online Courses HTML Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+	<!-- Home -->
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+	<div class="home">
+		<div class="home_background_container prlx_parent">
+			<div class="home_background prlx" style="background-image:url(images/courses_background.jpg)"></div>
+		</div>
+		<div class="home_content">
+			<h1>Courses</h1>
+		</div>
+	</div>
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+	<!-- Popular -->
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<div class="popular page_section">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title text-center">
+						<h1>Popular Courses</h1>
+					</div>
+				</div>
+			</div>
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-</head>
-
-<body>
-
-    <!-- Courses Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <h1>Our Popular Courses</h1>
-            </div>
-            <div class="row">
-
-
-                @foreach (var course in Model)
-                {
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="@course.ImageUrl" alt="@course.Title">
-                            <div class="bg-secondary p-4">
-                                <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>2 Students</small>
-                                    <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>@course.Duration</small>
-                                </div>
-                                <a class="h5" href="#">@course.Title</a>
-                                <p class="mt-3">@course.Description</p>
-                            </div>
-                        </div>
-                    </div>
-                }
+			<div class="row course_boxes">
+				@foreach (var course in Model)
+				{
+					<!-- Popular Course Item -->
+					<div class="col-lg-4 course_box">
+						<div class="card">
+							<img class="card-img-top" src="@course.ImageUrl" alt="https://unsplash.com/kellybrito">
+							<div class="card-body text-center">
+								<div class="card-title"><a href="courses.html">@course.Title</a></div>
+								<div class="card-text">@course.Description</div>
+							</div>
+							<div class="price_box d-flex flex-row align-items-center">
+								@* <div class="course_author_image">
+							<img src="@course.Instructor.ImageUrl" alt="instructor image">
+							</div> *@
+								<div class="course_author_name">@course.Instructor.FirstName @course.Instructor.LastName, <span>Instructor</span></div>
+								<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>$29</span></div>
+							</div>
+						</div>
+					</div>
+				}
 
 
-            </div>
-        </div>
-    </div>
-    <!-- Courses End -->
+			</div>
+		</div>
+	</div>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
+</div>
+<script src="~/js/courses_custom.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
-
-</html>
