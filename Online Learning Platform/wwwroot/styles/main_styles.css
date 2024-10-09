@@ -1015,8 +1015,12 @@ section
 {
 	width: 522px;
 }
-.register_title
+.register_content  p
 {
+	font-size:medium;
+	color: aliceblue;
+}
+.register_title {
 	color: #FFFFFF;
 	margin-bottom: 16px;
 	line-height: 1.63;
@@ -1029,6 +1033,7 @@ section
 {
 	color: #1a1a1a;
 }
+
 .register_text
 {
 	color: #FFFFFF;

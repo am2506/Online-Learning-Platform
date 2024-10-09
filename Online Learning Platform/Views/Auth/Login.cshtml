@@ -1,5 +1,5 @@
 ﻿<!-- Register -->
-@model SignUpViewModel
+@model LoginViewModel
 <div class="register py-5" style="background-image:url('@Url.Content("~/images/register_background0.jpg")')">
 
 	<div class="container">
@@ -10,7 +10,7 @@
                 <div class="register_section d-flex flex-column align-items-center justify-content-center">
                     <div class="register_content text-center align-self-center">
                         <h1 class="register_title">Log in to continue your learning journey</h1>
-                        <form id="register_form" class="register_form" method="post" asp-action="Register">
+                        <form id="register_form" class="register_form" method="post" asp-action="Login">
                             <div class="form-group">
                                 <input id="register_email" class="form-control" asp-for="Email" placeholder="Email Address" required>
                                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -27,8 +27,9 @@
                                 <button type="submit" class="btn btn-primary btn-lg">Log in</button>
                             </div>
                         </form>
-                        
-                        <p class="mt-3">Don't have an account? <a href="/Student/Login">Sign up</a></p>
+
+                        <a asp-action="Forgetpassword">Forget Password?</a>
+                        <p class="mt-3">Don't have an account? <a asp-action="SignUp">Sign up</a></p>
                     </div>
                 </div>
 			</div>
