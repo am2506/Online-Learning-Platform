@@ -18,6 +18,7 @@ namespace Online_Learning_Platform.Controllers
 
 		public IActionResult Index()
 		{
+
 			return View();
 		}
 

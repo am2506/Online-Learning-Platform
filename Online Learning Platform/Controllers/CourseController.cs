@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Repository.Interfaces;
+using Online_Learning_Platform.Repository.Repository;
 
 namespace Online_Learning_Platform.Controllers
 {
@@ -12,10 +14,24 @@ namespace Online_Learning_Platform.Controllers
             _coursesRepo = coursesRepo;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string ?SearchItem)
         {
-            var courses = await _coursesRepo.GetAllCoursesAsync();
-            return View();
+            var courses = Enumerable.Empty<Course>();
+            if (string.IsNullOrEmpty(SearchItem))
+            {
+                courses = await _coursesRepo.GetAllCoursesAsync();
+            }
+            else
+            {
+                courses = _coursesRepo.SearchByNameAsync(SearchItem);
+            }
+            return View(courses);
+            
         }
-    }
+		public IActionResult MyCourses(int Id)
+		{
+			var UserCourses = _coursesRepo.CoursesOfUser(Id);
+			return View(UserCourses);
+		}
+	}
 }

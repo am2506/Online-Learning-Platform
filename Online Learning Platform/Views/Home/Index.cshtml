@@ -1,6 +1,8 @@
-﻿
+﻿@model IEnumerable<Course>
+@inject ICourseRepository courseRepository
 @{
     ViewData["Title"] = "Home Page";
+	var Courses = await courseRepository.GetAllCoursesAsync();
 }
 
 <!-- Home -->
@@ -89,4 +91,4 @@
 	</div>
 </div>
 
-<partial name="../course/_popularcoursespartial"/>
+<partial name="../course/_popularcoursespartial" model="@Courses" />
