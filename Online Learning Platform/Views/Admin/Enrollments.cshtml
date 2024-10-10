@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Online_Learning_Platform.Models.Enrollment>
+<a asp-action="AddEnrollment" class="btn btn-primary">Add New Enrollment</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Student</th>
+            <th>Progress</th>
+            <th>Enrollment Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var enrollment in Model)
+        {
+            <tr>
+                <td>@enrollment.Course.Title</td>
+                <td>@enrollment.Student.UserName</td>
+                <td>@enrollment.Prograss</td>
+                <td>@enrollment.EnrollmentDate.ToString("MM/dd/yyyy")</td>
+                <td>
+                    <a asp-action="EditEnrollment" asp-route-id="@enrollment.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeleteEnrollment" asp-route-id="@enrollment.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -8,6 +8,7 @@
 		public string? ImageUrl { get; set; }
 		public double Duration { get; set; }
 		public int TotalLecture { get; set; }
+		//public decimal Price { get; set; }
 		//Foreign Key
 		public int CategoryId { get; set; }	
 		public int InstructorId { get; set; }
