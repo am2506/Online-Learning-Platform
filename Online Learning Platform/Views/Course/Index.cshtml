@@ -1,13 +1,19 @@
-﻿
-}
+﻿﻿@{
 
-<!DOCTYPE html>
-<html lang="en">
+}
 
 <head>
 	<title>Course - Courses</title>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Course Project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="~/styles/bootstrap4/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="~/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css">
+	<link rel="stylesheet" type="text/css" href="~/styles/courses_styles.css">
+	<link rel="stylesheet" type="text/css" href="~/styles/courses_responsive.css">
 </head>
+<!-- Home -->
 
 <div class="home">
 	<div class="home_background_container prlx_parent">
@@ -17,20 +23,5 @@
 		<h1>Courses</h1>
 	</div>
 </div>
-    <!-- Courses End -->
 
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-</body>
-
+<partial name="_PopularCoursesPartial" model="Model"></partial>

@@ -21,5 +21,10 @@ namespace Online_Learning_Platform.Repository.Repository
                 .Include(c => c.Category)
                 .ToListAsync();
         }
-    }
+
+		public Course GetCourseById(int id)
+		{
+            return _context.Courses.Include(u => u.Lessons).Include(x => x.Category).Include(d => d.Instructor).FirstOrDefault(c => c.Id == id);
+		}
+	}
 }
