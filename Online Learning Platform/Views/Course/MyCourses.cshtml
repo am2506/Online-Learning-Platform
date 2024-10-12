@@ -1,0 +1,37 @@
+﻿@model IQueryable<Course>
+@{
+    ViewData["Title"] = "MyCourses";
+}
+ 
+@if(Model.Any())
+{
+    <partial name="_popularcoursespartial" model="@Model" />
+}
+else
+{
+    <div class="services page_section">
+    <div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="section_title text-center">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+			</div>
+		</div>
+    
+        <div class="services_row d-flex justify-content-center align-items-center">
+            <div class="col-lg-4 service_item text-left d-flex flex-column align-items-start justify-content-start">
+                <h3>Not Enrollment Course</h3>
+                    <div class="img-fluid d-flex flex-column justify-content-end">
+                        <img src="~/images/NotCourse.jpeg" alt="">
+                </div>
+               
+            </div>
+        </div>
+  
+    </div>
+    </div>
+
+}
+
+

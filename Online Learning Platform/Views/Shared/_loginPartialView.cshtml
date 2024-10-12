@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<UserBase> SignInManager
+@inject UserManager<UserBase> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+
+    if (user != null)
+    {
+        <li class="main_nav_item">
+            <div class="dropdown custom-dropdown">
+                <a href="#" data-toggle="dropdown" class="d-flex align-items-center dropdown-link text-left" aria-haspopup="true" aria-expanded="false" data-offset="0, 20">
+                    <div class="profile-pic mr-3">
+                        <img src="~/images/person_2.jpg" alt="Image">
+                    </div>
+                    <div class="profile-info">
+                        <h3>@($"{user.FirstName} {user.LastName}")</h3>
+                        <span>New York City, USA</span>
+                    </div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-controller="Student" asp-action="StudentProfile" asp-route-UserName="@user.UserName"> <span class="icon icon-dashboard"></span>Your Profile</a>
+                    <a class="dropdown-item" asp-controller="Course" asp-action="MyCourses" asp-route-Id="@user.Id"><span class="icon icon-people"></span>My Courses</a>
+                    <a class="dropdown-item" href="#"><span class="icon icon-mail_outline"></span>Inbox <span class="number">3</span></a>
+                    <a class="dropdown-item" href="#"><span class="icon icon-cog"></span>Setting<span>New</span></a>
+                    <a class="dropdown-item" asp-controller="Auth" asp-action="LogOut"><span class="icon icon-sign-out"></span>Log out</a>
+                </div>
+            </div>
+        </li>
+    }
+}
+else
+{
+    <li class="main_nav_item"><a class="btn btn-primary" asp-controller="Auth" asp-action="Login">Login</a></li>
+    <li class="main_nav_item"><a class="btn btn-warning" asp-controller="Auth" asp-action="SignUp">Sign up</a></li>
+}

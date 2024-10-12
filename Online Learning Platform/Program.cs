@@ -14,6 +14,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
@@ -23,7 +24,20 @@ builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 	.AddDefaultTokenProviders();
 
 
+
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+
+// Configure
+builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
+	.AddEntityFrameworkStores<ApplicationDbContext>()
+	.AddDefaultTokenProviders();
+
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
 

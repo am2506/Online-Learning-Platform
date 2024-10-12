@@ -7,7 +7,12 @@ namespace Online_Learning_Platform.Repository.Interfaces
     public interface ICourseRepository
     {
         Task<IEnumerable<Course>> GetAllCoursesAsync();
+
         Course GetCourseById (int id); 
-        
+
+        IQueryable<Course> SearchByNameAsync(string name);
+        IQueryable<Course> CoursesOfUser(int Id);
+
+
     }
 }
