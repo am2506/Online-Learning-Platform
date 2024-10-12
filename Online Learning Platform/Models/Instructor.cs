@@ -6,9 +6,9 @@ namespace Online_Learning_Platform.Models
     
     public class Instructor : UserBase
     {
-        
-        //Navigation Property
-        public ICollection<Course> Courses { get; set; }
+		//public string? ImageUrl { get; set; }
+		//Navigation Property
+		public ICollection<Course> Courses { get; set; }
 
     }
 }

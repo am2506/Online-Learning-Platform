@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Repository.Interfaces;
 using Online_Learning_Platform.Repository.Repository;
@@ -8,33 +7,59 @@ namespace Online_Learning_Platform.Controllers
 {
     public class CourseController : Controller
     {
-        private readonly ICourseRepository _coursesRepo;
+        private readonly IGenericRepository<Course> _courseRepository;
+        private readonly IGenericRepository<Category> _categoryRepository;
+		private readonly IGenericRepository<Instructor> _instructorRepository;
 
-        public CourseController(ICourseRepository coursesRepo)
+		public CourseController(IGenericRepository<Course> courseRepository, IGenericRepository<Category> categoryRepository, IGenericRepository<Instructor> instructorRepository)
         {
-            _coursesRepo = coursesRepo;
+            _courseRepository = courseRepository;
+            _categoryRepository = categoryRepository;
+            _instructorRepository = instructorRepository;
         }
 
 
-        public async Task<IActionResult> Index(string ?SearchItem)
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var courses = Enumerable.Empty<Course>();
-            if (string.IsNullOrEmpty(SearchItem))
-            {
-                courses = await _coursesRepo.GetAllCoursesAsync();
-            }
-            else
-            {
-                courses = _coursesRepo.SearchByNameAsync(SearchItem);
-            }
-            return View(courses);
-            
+			IEnumerable<Course> courses;
+			if (!string.IsNullOrEmpty(searchTerm))
+			{
+				courses = await _courseRepository.GetWithIncludesAsync(
+					c => c.Instructor,
+					c => c.Category
+				);
+
+				courses = courses.Where(c => c.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+											 (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm, StringComparison.OrdinalIgnoreCase)||
+											 c.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+				);
+			}
+			else
+			{
+				courses = await _courseRepository.GetWithIncludesAsync(
+					c => c.Instructor,
+					c => c.Category
+				);
+			}
+			return View(courses);
         }
-		public IActionResult MyCourses(int Id)
+
+        public async Task<IActionResult> CategoryIndex()
+        {
+            IEnumerable<Category> categories = await _categoryRepository.GetWithIncludesAsync(
+                c => c.Courses
+            );
+            return View(categories);
+        }
+
+		public async Task<IActionResult> InstructorIndex()
 		{
-			var UserCourses = _coursesRepo.CoursesOfUser(Id);
-			return View(UserCourses);
+			IEnumerable<Instructor> instructors = await _instructorRepository.GetWithIncludesAsync(
+				c => c.Courses
+			);
+			return View(instructors);
 		}
+
 	}
 
 }
