@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Repository.Interfaces;
 using Online_Learning_Platform.Repository.Repository;
@@ -13,6 +14,7 @@ namespace Online_Learning_Platform.Controllers
         {
             _coursesRepo = coursesRepo;
         }
+
 
         public async Task<IActionResult> Index(string ?SearchItem)
         {
@@ -34,4 +36,5 @@ namespace Online_Learning_Platform.Controllers
 			return View(UserCourses);
 		}
 	}
+
 }
