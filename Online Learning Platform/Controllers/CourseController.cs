@@ -29,7 +29,7 @@ namespace Online_Learning_Platform.Controllers
 					c => c.Category
 				);
 
-				courses = courses.Where(c => c.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+			courses = courses.Where(c => c.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
 											 (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm, StringComparison.OrdinalIgnoreCase)||
 											 c.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
 				);

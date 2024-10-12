@@ -27,15 +27,6 @@ builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-
-
-// Configure
-builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
-	.AddEntityFrameworkStores<ApplicationDbContext>()
-	.AddDefaultTokenProviders();
-
-
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 var app = builder.Build();
