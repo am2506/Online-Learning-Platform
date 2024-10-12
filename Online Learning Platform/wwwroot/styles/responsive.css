@@ -47,7 +47,9 @@
 {
 	.header
 	{
-		width: 1200px;
+
+		width: 95%;
+
 	}
 	.header_content
 	{
@@ -80,7 +82,9 @@
 {
 	.header
 	{
-		width: 90%;
+
+		width: 100%;
+
 	}
 	.header_content
 	{
