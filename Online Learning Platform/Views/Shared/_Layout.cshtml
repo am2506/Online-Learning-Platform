@@ -40,6 +40,7 @@
 			<!-- Main Navigation -->
 			<nav class="main_nav_container">
 				<div class="main_nav">
+
 						<ul class="main_nav_list">
 							<li class="main_nav_item">
 								<form class="navbar-form" role="search" asp-controller="Course" asp-action="Index">
@@ -50,13 +51,16 @@
 										</div>
 									</div>
 								</form>
+
 							</li>
 						<li class="main_nav_item"><a asp-controller="Home" asp-action="Index">Home</a></li>
 						<li class="main_nav_item"><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
 						<li class="main_nav_item"><a asp-controller="Course" asp-action="Index">Courses</a></li>
 						<li class="main_nav_item"><a asp-controller="Home" asp-action="Contact">Contact</a></li>
 						<!--Profile Details-->
+
 							<partial name="_loginPartialView" />
+
 					</ul>
 						
 				</div>

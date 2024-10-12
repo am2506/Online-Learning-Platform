@@ -382,7 +382,7 @@ section
 3.3 Header Side
 *********************************/
 
-
+r
 .header_side
 {
 	width: 279px;
@@ -433,7 +433,6 @@ section
 {
 	color: #ffb606;
 }
-
 
 /*********************************
 4. Menu
@@ -665,6 +664,7 @@ section
 	background-position: center center;
 }
 
+
 .home_content
 {
 
@@ -678,6 +678,10 @@ section
 	transform: translateX(-50%);
 
 	background: #ffb606;
+
+
+	background: #ffb606;
+
 
 	padding-top: 24px;
 	padding-bottom: 18px;

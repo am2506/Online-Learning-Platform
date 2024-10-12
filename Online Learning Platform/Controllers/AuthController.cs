@@ -8,6 +8,7 @@ using System.Drawing.Drawing2D;
 
 namespace Online_Learning_Platform.Controllers
 {
+
     public class AuthController : Controller
     {
         #region Constructor
@@ -181,4 +182,5 @@ namespace Online_Learning_Platform.Controllers
         }
         #endregion
     }
+
 }
