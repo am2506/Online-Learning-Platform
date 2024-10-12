@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Course Enrollment";
+}
+<partial name="_HomePartialView" />
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<script>
+    $(document).ready(function () {
+        
+            event.preventDefault(); // Prevent the default action
+            const message = '@ViewBag.message'; // Fetch the message from ViewBag
+
+            if (message == 1) {
+                Swal.fire({
+                    icon: 'success',
+                    title: "Congratulations , You're Enrolled Successfully",
+                });
+                } else {
+                    // Optionally handle the case where there is no message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: "Sorry , You're Enrolled Before",
+                    });
+                }
+        
+    });
+</script>
+
+</body>
+</html>

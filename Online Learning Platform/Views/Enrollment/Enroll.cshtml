@@ -1,0 +1,149 @@
+﻿ @model Course
+
+@{
+    ViewData["Title"] = "Course Enrollment";
+}
+
+<partial name="_HomePartialView" />
+
+<html>
+    <head>
+    <style>
+        .enroll-button {
+            background-color: rgb(39, 41, 108);
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-left: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .enroll-button:hover {
+                background-color: rgb(92, 94, 151);
+              color:white;
+            transform: scale(1.05); 
+        }
+
+        .title
+        {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            color: rgb(39, 41, 108);
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-shadow: 10px 10px 5px White;
+        }
+
+        .bigcontainer
+        {
+            display: flex;
+            margin-left: 40px;
+            /* background: white; */
+            overflow: hidden;
+            max-width: 80%;
+        }
+        .imgcontainer
+        {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .imgcontainer img{
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+        }
+
+        .textcontainer
+        {
+            margin-left: 80px;
+            padding: 20px;
+            flex: 1;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: #f8f9fa;
+            max-width:500px;
+        }
+        .textcontainer p
+        {
+                font-weight: bold;
+                color: black;
+                font-size: 40px;
+        }
+        .textcontainer ul{
+                margin-left: 30px;
+                color: #009999;
+                line-height: 40px;
+                font-weight: bold;
+                font-size: 20px;
+        }
+        .details
+        {
+            margin-left: 40px;
+            margin-top: 30px;
+        }
+        .details h2
+        {
+                font-weight: bold;
+                color: black;
+                font-size: 30px;
+        }
+        .details p
+        {
+                margin-left: 40px;
+                font-size: 25px;
+                color: #009999;
+        }
+    </style>
+
+    </head>
+
+    <body>
+    <div class="title">
+        <h1>@Model.Title</h1>
+    </div>
+
+    <div class="bigcontainer">
+        <div class="imgcontainer">
+            <img src="~/images/course_1.jpg"  />
+        </div>
+
+        <div class="textcontainer">
+            <p>This Course Includes:</p>
+            <ul>
+                <li>Instructor Name: @Model.Instructor.FirstName @Model.Instructor.LastName</li>
+                <li>Course Category: @Model.Category.Name</li>
+                <li>@Model.Duration Hours </li>
+                <li>@Model.Lessons.Count() Lessons</li>
+                <li>Downloadable Resources</li>
+                <li>Full Time Access</li>
+                <li>Access On Mobile and TV</li>
+                <li>Assignments</li>
+                <li>Certificate Of Completion</li>
+
+            </ul>
+            <a class="enroll-button" asp-controller="Enrollment" asp-action="Save" asp-route-courseid="@Model.Id">Enroll Now</a>
+        </div>
+    </div>
+
+    <div class="details" >
+        <h2>Course Description</h2>
+        <p>@Model.Description</p>
+    </div>
+
+    </body>
+</html>
+
+
+
+   
+
+   
+    
+
