@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Repository.Interfaces;
+using Online_Learning_Platform.Repository.Repository;
 
 namespace Online_Learning_Platform.Controllers
 {
@@ -16,6 +17,7 @@ namespace Online_Learning_Platform.Controllers
             _categoryRepository = categoryRepository;
             _instructorRepository = instructorRepository;
         }
+
 
         public async Task<IActionResult> Index(string searchTerm)
         {
@@ -59,4 +61,5 @@ namespace Online_Learning_Platform.Controllers
 		}
 
 	}
+
 }

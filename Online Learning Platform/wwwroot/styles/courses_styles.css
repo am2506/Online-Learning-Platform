@@ -371,18 +371,24 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-	.main_nav_item a:hover {
-		color: #A0D683;
-	}
+
+.main_nav_item a:hover
+{
+	color: #ffb606;
+}
+
 
 /*********************************
 3.3 Header Side
 *********************************/
 
-.header_side {
+
+.header_side
+{
 	width: 279px;
 	height: 100%;
-	background: #A0D683;
+	background: #ffb606;
+
 }
 .header_side img
 {
@@ -422,9 +428,12 @@ section
 	padding: 10px;
 	color: #3a3a3a;
 }
-	.hamburger_container:hover i {
-		color: #A0D683;
-	}
+
+.hamburger_container:hover i
+{
+	color: #ffb606;
+}
+
 
 /*********************************
 4. Menu
@@ -499,9 +508,12 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-	.menu_item a:hover {
-		color: #A0D683;
-	}
+
+.menu_item a:hover
+{
+	color: #ffb606;
+}
+
 .menu_close_container
 {
 	position: absolute;
@@ -545,8 +557,11 @@ section
 	transition: all 200ms ease;
 }
 .menu_close_container:hover .menu_close,
-.menu_close_container:hover .menu_close::after {
-	background: #A0D683;
+
+.menu_close_container:hover .menu_close::after
+{
+	background: #ffb606;
+
 }
 
 /*********************************
@@ -578,9 +593,12 @@ section
 {
 	color: #3a3a3a;
 }
-	.menu_social_item a i:hover {
-		color: #A0D683;
-	}
+
+.menu_social_item a i:hover
+{
+	color: #ffb606;
+}
+
 .menu_container.active .menu_social_container
 {
 	-webkit-transform: translateY(0px);
@@ -646,7 +664,10 @@ section
 	background-size: cover;
 	background-position: center center;
 }
-.home_content {
+
+.home_content
+{
+
 	position: absolute;
 	left: 50%;
 	bottom: 109px;
@@ -655,7 +676,9 @@ section
 	-ms-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
-	background: #A0D683;
+
+	background: #ffb606;
+
 	padding-top: 24px;
 	padding-bottom: 18px;
 	padding-left: 39px;
@@ -695,21 +718,24 @@ section
 	font-weight: 500;
 	padding-top: 24px;
 }
-	.section_title h1::before {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 50%;
-		-webkit-transform: translateX(-50%);
-		-moz-transform: translateX(-50%);
-		-ms-transform: translateX(-50%);
-		-o-transform: translateX(-50%);
-		transform: translateX(-50%);
-		width: 55px;
-		height: 4px;
-		content: '';
-		background: #A0D683;
-	}
+
+.section_title h1::before
+{
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	width: 55px;
+	height: 4px;
+	content: '';
+	background: #ffb606;
+}
+
 
 /*********************************
 8. Buttons
@@ -823,10 +849,13 @@ section
 {
 	color: #a5a5a5;
 }
-.course_price {
+
+.course_price
+{
 	width: 67px;
 	height: 67px;
-	background: #A0D683;
+	background: #ffb606;
+
 	margin-left: auto;
 }
 .course_price span
@@ -875,14 +904,17 @@ section
 	font-weight: 500;
 	color: #1a1a1a;
 }
-	.newsletter_email:focus {
-		outline: solid 2px #A0D683;
-	}
-.newsletter_submit_btn {
+
+.newsletter_email:focus
+{
+	outline: solid 2px #ffb606;
+}
+.newsletter_submit_btn
+{
 	width: 164px;
 	height: 42px;
 	border: none;
-	background: #A0D683;
+	background: #ffb606;
 	color: #FFFFFF;
 	font-size: 14px;
 	font-weight: 500;
@@ -942,9 +974,12 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-	.footer_list_item a:hover {
-		color: #A0D683;
-	}
+
+.footer_list_item a:hover
+{
+	color: #ffb606;
+}
+
 .footer_contact_item
 {
 	font-size: 14px;
@@ -982,9 +1017,12 @@ section
 {
 	color: #FFFFFF;
 }
-	.footer_social .menu_social_item a i:hover {
-		color: #A0D683;
-	}
+
+.footer_social .menu_social_item a i:hover
+{
+	color: #ffb606;
+}
+
 .footer_social .menu_social_item:last-child
 {
 	margin-right: 0px;
