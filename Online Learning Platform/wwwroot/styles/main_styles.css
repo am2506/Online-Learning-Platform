@@ -388,7 +388,6 @@ section
 	color: #ffb606;
 }
 
-
 /*********************************
 3.3 Header Side
 *********************************/
@@ -397,6 +396,9 @@ section
 {
 	width: 279px;
 	height: 100%;
+
+	background: #ffb606;
+
 
 	background: #ffb606;
 
@@ -1535,13 +1537,6 @@ input:last-of-type
 }
 
 
-/*********************************
-15.3 Footer Copyright
-*********************************/
-
-.footer_bar
-{
-=======
 .footer_copyright span {
 	color: white
 }

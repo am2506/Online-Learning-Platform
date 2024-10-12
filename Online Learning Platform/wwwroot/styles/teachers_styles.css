@@ -560,6 +560,7 @@ section
 }
 .menu_close_container:hover .menu_close,
 
+
 .menu_close_container:hover .menu_close::after
 {
 	background: #ffb606;
@@ -671,8 +672,10 @@ section
 	background-position: center center;
 }
 
+
 .home_content
 {
+
 
 	position: absolute;
 	left: 50%;
@@ -682,6 +685,7 @@ section
 	-ms-transform: translateX(-50%);
 	-o-transform: translateX(-50%);
 	transform: translateX(-50%);
+
 
 	background: #ffb606;
 
@@ -804,6 +808,7 @@ section
     border-top-right-radius: 0px;
 }
 
+
 .card_plus
 {
 
@@ -817,6 +822,7 @@ section
 	transform: translate(-50%, -50%) scale(0.5);
 	width: 75px;
 	height: 75px;
+
 
 	background: #ffb606;
 
@@ -1097,6 +1103,7 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
+
 
 .footer_list_item a:hover
 {
