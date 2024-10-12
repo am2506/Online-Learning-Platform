@@ -169,7 +169,24 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Programming"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Mathematics"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Science"
+                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Course", b =>
@@ -208,7 +225,42 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Courses", (string)null);
+                    b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "Learn the basics of C# programming.",
+                            Duration = 10.5,
+                            ImageUrl = "/images/c#.png",
+                            InstructorId = 1,
+                            Title = "C# Programming",
+                            TotalLecture = 20
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 2,
+                            Description = "An advanced course on calculus and linear algebra.",
+                            Duration = 8.0,
+                            ImageUrl = "/images/math.png",
+                            InstructorId = 2,
+                            Title = "Advanced Mathematics",
+                            TotalLecture = 15
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            Description = "Learn the basics of Python programming.",
+                            Duration = 10.5,
+                            ImageUrl = "/images/python.png",
+                            InstructorId = 1,
+                            Title = "Python Programming",
+                            TotalLecture = 20
+                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Enrollment", b =>
@@ -232,7 +284,25 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Enrollments", (string)null);
+                    b.ToTable("Enrollments");
+
+                    b.HasData(
+                        new
+                        {
+                            StudentId = 1,
+                            CourseId = 1,
+                            EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 1,
+                            Prograss = 0
+                        },
+                        new
+                        {
+                            StudentId = 1,
+                            CourseId = 2,
+                            EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 2,
+                            Prograss = 50
+                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Lesson", b =>
@@ -251,7 +321,51 @@ namespace Online_Learning_Platform.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Lessons", (string)null);
+                    b.ToTable("Lessons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CourseId = 1,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CourseId = 1,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CourseId = 2,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CourseId = 2,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CourseId = 3,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CourseId = 3,
+                            VideoUrl = "/videos/video.mp4"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CourseId = 3,
+                            VideoUrl = "/videos/video.mp4"
+                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.UserBase", b =>
@@ -344,6 +458,34 @@ namespace Online_Learning_Platform.Migrations
                     b.HasBaseType("Online_Learning_Platform.Models.UserBase");
 
                     b.HasDiscriminator().HasValue("Instructor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cd180811-92d0-4688-84fa-1d1ab29bce46",
+                            Email = "Heba@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Heba",
+                            LastName = "Mohammed",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ba2bf242-dc95-48c5-94bc-f1994ffa4134",
+                            Email = "Shahd@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Shahd",
+                            LastName = "Sofy",
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false
+                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Student", b =>

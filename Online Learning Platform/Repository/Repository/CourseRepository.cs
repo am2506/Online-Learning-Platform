@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Online_Learning_Platform.Repository.Repository
 {
+
     public class CourseRepository : ICourseRepository
+
+    public class CourseRepository:ICourseRepository
+
     {
         private readonly ApplicationDbContext _context;
 
@@ -25,12 +29,16 @@ namespace Online_Learning_Platform.Repository.Repository
 		}
 
 		public async Task<IEnumerable<Course>> GetAllCoursesAsync()
+=======
+        public async Task<IEnumerable<Course>> GetAllCoursesAsync()
+
         {
             return await _context.Courses
                 .Include(c => c.Instructor)
                 .Include(c => c.Category)
                 .ToListAsync();
         }
+
 
         public IQueryable<Course> SearchByNameAsync(string name)
         {
@@ -39,5 +47,6 @@ namespace Online_Learning_Platform.Repository.Repository
                 .Where(c => c.Title.Contains(name, StringComparison.OrdinalIgnoreCase))
                 .AsQueryable();
         }
+
     }
 }
