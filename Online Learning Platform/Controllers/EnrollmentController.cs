@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
 using Online_Learning_Platform.Models;
@@ -28,23 +29,24 @@ namespace Online_Learning_Platform.Controllers
             return View( course);
 		}
 
+        [Authorize]
 		public IActionResult Save(int courseid)
 		{
 			
 		    var checkin=signInManager.IsSignedIn(User);
-			
-			if(checkin)
-			{
-				var userid = Int16.Parse(userManager.GetUserId(User));
-				if(userid !=null)
-				{
-				    var ckeckenrollornot=enrollmentRepository.check(courseid,userid);
-					if(ckeckenrollornot)
-					{
-						ViewBag.message = 0;
-					}
-					else
-					{
+
+            if (checkin)
+            {
+                var userid = Int16.Parse(userManager.GetUserId(User));
+                if (userid != null)
+                {
+                    var ckeckenrollornot = enrollmentRepository.check(courseid, userid);
+                    if (ckeckenrollornot)
+                    {
+                        ViewBag.message = 0;
+                    }
+                    else
+                    {
                         Enrollment enrollment = new Enrollment()
                         {
                             CourseId = courseid,
@@ -54,15 +56,16 @@ namespace Online_Learning_Platform.Controllers
                         };
                         enrollmentRepository.Insert(enrollment);
                         enrollmentRepository.Save();
-						ViewBag.message = 1;
+                        ViewBag.message = 1;
                     }
-                    
                 }
-				
-
+               
             }
 
-			return View();
+           
+
+
+            return View();
 			
 
 			

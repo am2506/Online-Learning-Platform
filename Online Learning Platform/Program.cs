@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 
 // Configure
 builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
@@ -24,6 +25,13 @@ builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 
 
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = "/Auth/Login";
+    config.AccessDeniedPath = "/Auth/AccessDenied";
+    config.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+});
 
 var app = builder.Build();
 

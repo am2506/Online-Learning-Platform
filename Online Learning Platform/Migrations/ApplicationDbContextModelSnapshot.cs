@@ -234,7 +234,7 @@ namespace Online_Learning_Platform.Migrations
                             CategoryId = 1,
                             Description = "Learn the basics of C# programming.",
                             Duration = 10.5,
-                            ImageUrl = "/images/c#.png",
+                            ImageUrl = "/images/cSharp.png",
                             InstructorId = 1,
                             Title = "C# Programming",
                             TotalLecture = 20
@@ -260,6 +260,89 @@ namespace Online_Learning_Platform.Migrations
                             InstructorId = 1,
                             Title = "Python Programming",
                             TotalLecture = 20
+                        });
+                });
+
+            modelBuilder.Entity("Online_Learning_Platform.Models.DevData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Fayoum ,Egypt");
+
+                    b.Property<string>("College")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Job")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Full Stack .Net Developer");
+
+                    b.Property<string>("LinkedinUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DevData");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/avatar7.png",
+                            LinkedinUrl = "https://www.linkedin.com/in/a7medmansour/",
+                            Name = "Ahmed Mansour"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            College = "Faculty of Engineering",
+                            ImageUrl = "/images/avatar7.png",
+                            LinkedinUrl = "#",
+                            Name = "Mohamed Khaled"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/heba-muhammad-64768924a/",
+                            Name = "Heba Mohamed"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/nisreen-nasr-295079222/",
+                            Name = "Nisreen Nasr"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/shahd-sofy-6573742a7/",
+                            Name = "Shahd Sofy"
                         });
                 });
 
@@ -457,6 +540,10 @@ namespace Online_Learning_Platform.Migrations
                 {
                     b.HasBaseType("Online_Learning_Platform.Models.UserBase");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasDiscriminator().HasValue("Instructor");
 
                     b.HasData(
@@ -464,27 +551,29 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd180811-92d0-4688-84fa-1d1ab29bce46",
+                            ConcurrencyStamp = "5d08c359-45ba-4d81-9dd0-219131ba6ba2",
                             Email = "Heba@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Heba",
                             LastName = "Mohammed",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            ImageUrl = "/images/teacher_1.jpg"
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba2bf242-dc95-48c5-94bc-f1994ffa4134",
+                            ConcurrencyStamp = "f1971258-e8d5-4906-b824-96b32dcc0e5d",
                             Email = "Shahd@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Shahd",
                             LastName = "Sofy",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            ImageUrl = "/images/teacher_4.jpg"
                         });
                 });
 

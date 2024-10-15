@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Online_Learning_Platform.Models;
+using Online_Learning_Platform.Models.Data;
 using Online_Learning_Platform.ViewModels;
 using System.Diagnostics;
 
@@ -9,10 +10,11 @@ namespace Online_Learning_Platform.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 
-
-		public HomeController(ILogger<HomeController> logger)
+		private readonly ApplicationDbContext _context;
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
 		{
 			_logger = logger;
+			_context = db;
 
 		}
 
@@ -37,7 +39,7 @@ namespace Online_Learning_Platform.Controllers
 		}
 		public IActionResult AboutUs()
 		{
-			return View();
+			return View(_context.DevData.ToList());
 		}
 	}
 }
