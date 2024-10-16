@@ -1,8 +1,8 @@
 ﻿@model Online_Learning_Platform.Models.Category
 
-@{
+@* @{
     ViewData["Title"] = "Edit Category";
-}
+} *@
 
 <h1>Edit Category</h1>
 
@@ -10,8 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditCategory">
-            @* <div asp-validation-summary="All" class="text-danger"></div> *@
+        <form asp-action="EditCategory" method="post">
+            <!-- Ensure method="post" is set -->
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -22,6 +22,7 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
 </div>
 
@@ -29,8 +30,8 @@
     <a asp-action="Categories">Back to List</a>
 </div>
 
-@section Scripts {
+@* @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+} *@
