@@ -241,38 +241,6 @@ namespace Online_Learning_Platform.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Courses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Learn ASP.NET Core",
-                            Duration = 10.0,
-                            InstructorId = 1,
-                            Title = "ASP.NET Core",
-                            TotalLecture = 20
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Description = "Learn EF Core",
-                            Duration = 8.0,
-                            InstructorId = 2,
-                            Title = "Entity Framework",
-                            TotalLecture = 16
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 1,
-                            Description = "Learn JavaScript",
-                            Duration = 6.0,
-                            InstructorId = 3,
-                            Title = "JavaScript Basics",
-                            TotalLecture = 12
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Enrollment", b =>
@@ -339,12 +307,19 @@ namespace Online_Learning_Platform.Migrations
                         .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -380,7 +355,6 @@ namespace Online_Learning_Platform.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -399,92 +373,6 @@ namespace Online_Learning_Platform.Migrations
                     b.HasDiscriminator().HasValue("UserBase");
 
                     b.UseTphMappingStrategy();
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d25339b-5f8e-485f-a82d-210b5712b0af",
-                            Email = "instructor1@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAENguv5E0DQxINOakx0nDmeHU4DRAQmaCQWV2VDv7qkeTD8WFHgJUfts2+boR7pRiYA==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Instructor",
-                            TwoFactorEnabled = false,
-                            UserName = "instructor1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "458837d5-548e-4734-aa59-4493c1f39571",
-                            Email = "instructor2@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEDvN8fk5lzeCx5S0QqAvigIuAsVv90Ss9qrJshS/T1fbhakYwznk/sP9zpQPBeOgig==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Instructor",
-                            TwoFactorEnabled = false,
-                            UserName = "instructor2"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a44198c-d9f5-4536-883c-d5b7dddb393f",
-                            Email = "Student1@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOrjkyN1vMyRfJu9wG3Z1FVh7LggbOjXk5gp1FNM91qKVK2+wzD87mgJvggl1DDKDQ==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Student",
-                            TwoFactorEnabled = false,
-                            UserName = "Student1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "85346c72-6b0b-43e4-b4b6-02bc2d37d822",
-                            Email = "Student2@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAECgIkPJLTxcjVhIjOE6U6nXQ/FGr1wgNrvcEuXwFmjeYB4Jpa5Jlywhb1w4Z2kNJNA==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Student",
-                            TwoFactorEnabled = false,
-                            UserName = "Student2"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6d4e8007-bf32-45d7-af39-8388be82ce1c",
-                            Email = "Student3@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHnEGivWBWRAdj/jAYK2m+yeGmZl6QHnXO0LsbqB+KuhVcFZF0+6xrNrsvHM8EVmOg==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Student",
-                            TwoFactorEnabled = false,
-                            UserName = "Student3"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "af6f02af-afcd-4c62-ad88-f10b4c0cb41d",
-                            Email = "instructor3@example.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEBj7wZt5xVSK/fMmUJ1O+hgWk3ap5yTME0KPVzjIa3h2ZuHa2y20tF9poGH6zNGqbw==",
-                            PhoneNumberConfirmed = false,
-                            RoleName = "Instructor",
-                            TwoFactorEnabled = false,
-                            UserName = "instructor3"
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Instructor", b =>
