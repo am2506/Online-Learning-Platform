@@ -58,10 +58,10 @@ public class AdminController : Controller
 
         return View(courses);
     }
-    // Load categories and instructors (filtered by RoleName = 'Instructor')
+  
     private void LoadCategoriesAndInstructors(CourseViewModel model)
     {
-        // Load categories and instructors for dropdowns
+        
         model.Categories = _context.Categories.Select(c => new SelectListItem
         {
             Value = c.Id.ToString(),
@@ -69,11 +69,11 @@ public class AdminController : Controller
         }).ToList();
 
         model.Instructors = _context.Users
-            .Where(u => u.RoleName == "Instructor") // Assuming RoleName is "Instructor"
+            .Where(u => u.RoleName == "Instructor") 
             .Select(u => new SelectListItem
             {
                 Value = u.Id.ToString(),
-                Text = u.UserName // Assuming FullName is a property on User
+                Text = u.UserName 
             }).ToList();
     }
 
@@ -82,7 +82,7 @@ public class AdminController : Controller
     {
         var model = new CourseViewModel();
 
-        // Load dropdowns for categories and instructors
+      
         LoadCategoriesAndInstructors(model);
 
         return View(model);
@@ -111,7 +111,7 @@ public class AdminController : Controller
             return RedirectToAction("Courses");
         }
 
-        // Reload dropdowns if validation fails
+        
         LoadCategoriesAndInstructors(model);
         return View(model);
     }
@@ -144,6 +144,36 @@ public class AdminController : Controller
 
         // Return the view with the model
         return View(model);
+    }
+    [HttpPost]
+    public IActionResult EditCourse(CourseViewModel course)
+    {
+        if (ModelState.IsValid)
+        {
+
+            var model = new Course
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                ImageUrl = course.ImageUrl,
+                Duration = course.Duration,
+                TotalLecture = course.TotalLecture,
+                CategoryId = course.CategoryId,
+                InstructorId = course.InstructorId
+            };
+            _context.Courses.Update(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("Courses");
+        }
+    
+
+        // Load dropdown options for categories and instructors
+        LoadCategoriesAndInstructors(course);
+
+        // Return the view with the model
+        return View(course);
     }
 
 
@@ -393,6 +423,14 @@ public class AdminController : Controller
         //                                      .ToList();
         return View(enrollments);
     }
+    private void LoadCoursesAndStudents()
+    {
+        var courses = _context.Courses.ToList() ?? new List<Course>();
+        var students = _context.Students.ToList() ?? new List<Student>();
+
+        ViewBag.Courses = new SelectList(courses, "Id", "CourseName");
+        ViewBag.Students = new SelectList(students, "Id", "FullName");
+    }
     [HttpGet]
     public IActionResult AddEnrollment()
     {
@@ -446,26 +484,8 @@ public class AdminController : Controller
     }
     #endregion
 
-    // Helper function to load Categories and Instructors for the views
-    private void LoadCategoriesAndInstructors2()
-    {
-        var categories = _context.Categories.ToList() ?? new List<Category>();
-        var instructors = _context.Instructors.ToList() ?? new List<Instructor>();
-
-        ViewBag.Categories = new SelectList(categories, "Id", "Name");
-        ViewBag.Instructors = new SelectList(instructors, "Id", "Name");
-    }
-
-
     
-    private void LoadCoursesAndStudents()
-    {
-        var courses = _context.Courses.ToList() ?? new List<Course>();
-        var students = _context.Students.ToList() ?? new List<Student>();
-
-        ViewBag.Courses = new SelectList(courses, "Id", "CourseName");
-        ViewBag.Students = new SelectList(students, "Id", "FullName");
-    }
+   
 
 
 }

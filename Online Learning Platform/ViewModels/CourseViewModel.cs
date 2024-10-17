@@ -14,8 +14,8 @@ namespace Online_Learning_Platform.ViewModels
         public int CategoryId { get; set; }
         public int InstructorId { get; set; }
 
-        public IEnumerable<SelectListItem> Categories { get; set; }
-        public IEnumerable<SelectListItem> Instructors { get; set; }
+        public IEnumerable<SelectListItem>? Categories { get; set; }
+        public IEnumerable<SelectListItem>? Instructors { get; set; }
     }
 
 }
