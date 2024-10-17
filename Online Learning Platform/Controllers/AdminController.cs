@@ -17,18 +17,58 @@ public class AdminController : Controller
     }
 
     // Admin Dashboard Home Page
+    //public async Task<IActionResult> Index()
+    //{
+    //    var dashboardData = new DashboardViewModel
+    //    {
+    //        TotalUsers = await _context.Users.CountAsync(),
+    //        TotalCourses = await _context.Courses.Include(c => c.Category).CountAsync(),
+    //        TotalEnrollments = await _context.Enrollments.CountAsync(),
+    //        TotalCategories = await _context.Categories.CountAsync(),
+    //    };
+
+    //    return View(dashboardData);
+    //}
     public async Task<IActionResult> Index()
     {
         var dashboardData = new DashboardViewModel
         {
+            // Summary data
             TotalUsers = await _context.Users.CountAsync(),
             TotalCourses = await _context.Courses.Include(c => c.Category).CountAsync(),
             TotalEnrollments = await _context.Enrollments.CountAsync(),
             TotalCategories = await _context.Categories.CountAsync(),
+
+            // Data for User Roles Chart
+            UserRoles = await _context.Users.GroupBy(u => u.RoleName)
+                .Select(g => g.Key).ToListAsync(),
+            RoleCounts = await _context.Users.GroupBy(u => u.RoleName)
+                .Select(g => g.Count()).ToListAsync(),
+
+            // Data for Courses by Category Chart
+            Categories = await _context.Courses.GroupBy(c => c.Category.Name)
+                .Select(g => g.Key).ToListAsync(),
+            CategoryCounts = await _context.Courses.GroupBy(c => c.Category.Name)
+                .Select(g => g.Count()).ToListAsync(),
+
+            // Data for Course Enrollment Counts
+            CourseTitles = await _context.Courses.Select(c => c.Title).ToListAsync(),
+            CourseEnrollmentCounts = await _context.Courses
+                .Select(c => c.Enrollments.Count).ToListAsync(),
+
+            // Data for Enrollment Trends by Date
+            EnrollmentDates = await _context.Enrollments
+                .GroupBy(e => e.EnrollmentDate.Date)
+                .Select(g => g.Key.ToShortDateString()).ToListAsync(),
+            DailyEnrollments = await _context.Enrollments
+                .GroupBy(e => e.EnrollmentDate.Date)
+                .Select(g => g.Count()).ToListAsync()
         };
 
         return View(dashboardData);
     }
+
+
 
 
     #region Courses
