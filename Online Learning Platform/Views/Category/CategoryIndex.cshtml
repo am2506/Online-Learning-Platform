@@ -33,15 +33,17 @@
 							<div class="card">
 								<img class="card-img-top" src="@course.ImageUrl" alt="https://unsplash.com/kellybrito">
 								<div class="card-body text-center">
-									<div class="card-title"><a href="courses.html">@course.Title</a></div>
-									<div class="card-text">@course.Description</div>
+									<div class="card-title"><a href="">@course.Title</a></div>
+									<div class="card-text" style="height:5rem; overflow:hidden;" title="Hover to see full description">@course.Description</div>
 								</div>
 								<div class="price_box d-flex flex-row align-items-center">
 									@* <div class="course_author_image">
 										<img src="@course.Instructor.ImageUrl" alt="instructor image">
 									</div> *@
-									@* <div class="course_author_name">@course.Instructor.FirstName @course.Instructor.LastName, <span>Instructor</span></div> *@
-									<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>$29</span></div>
+									<div class="course_author_name">@cat.Name </div>
+									<div class="course_price d-flex flex-column align-items-center justify-content-center">
+										<a asp-controller="Enrollment" asp-action="Enroll" asp-route-Id="@course.Id" style="color:white;">Enroll Now</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -55,3 +57,13 @@
 </div>
 
 <script src="~/js/courses_custom.js"></script>
+<script>
+	document.querySelectorAll('.card-text').forEach(element => {
+		element.addEventListener('mouseenter', function () {
+			this.style.height = 'auto';
+		});
+		element.addEventListener('mouseleave', function () {
+			this.style.height = '5rem';
+		});
+	});
+</script>

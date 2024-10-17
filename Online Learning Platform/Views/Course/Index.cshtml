@@ -1,4 +1,4 @@
-@model IEnumerable<Course>
+@model CourseIndexViewModel
 @{
 
 }
@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="~/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/courses_styles.css">
 	<link rel="stylesheet" type="text/css" href="~/styles/courses_responsive.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 <!-- Home -->
 
@@ -21,7 +23,20 @@
 <link rel="stylesheet" type="text/css" href="~/styles/courses_styles.css">
 <link rel="stylesheet" type="text/css" href="~/styles/courses_responsive.css">
 
+<style>
+	.form-select {
+		width: 200px; /* Adjust width as needed */
+	}
 
+	.btn {
+		padding: 0.5rem 1rem; /* Adjust button size */
+	}
+
+	/* Add margin between elements */
+	.form-select {
+		margin-right: 10px; /* Space between dropdown and button */
+	}
+</style>
 <div class="super_container">
   <!-- Home -->
 
@@ -33,10 +48,20 @@
 			<h1>Courses</h1>
 		</div>
 	</div>
+	<form method="get" asp-action="Index" class="d-flex align-items-center mb-4">
+		<select name="categoryId" class="form-select me-2" aria-label="Select Category">
+			<option value="">All Categories</option>
+			@foreach (var category in Model.Categories)
+			{
+				<option value="@category.Id">@category.Name</option>
+			}
+		</select>
 
+		<button type="submit" class="btn btn-success" style="background-color:gold;">Filter</button>
+	</form>
 	<!-- Popular -->
 
-	<div class="popular page_section">
+@* 	<div class="popular page_section">
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -58,9 +83,7 @@
 								<div class="card-text">@course.Description</div>
 							</div>
 							<div class="price_box d-flex flex-row align-items-center">
-								@* <div class="course_author_image">
-							<img src="@course.Instructor.ImageUrl" alt="instructor image">
-							</div> *@
+								
 								<div class="course_author_name">@course.Instructor.FirstName @course.Instructor.LastName, <span>Instructor</span></div>
 								<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>$29</span></div>
 							</div>
@@ -72,10 +95,10 @@
 			</div>
 		</div>
 	</div>
-
+ *@
 </div>
 <script src="~/js/courses_custom.js"></script>
 
 
 
-<partial name="_PopularCoursesPartial" model="Model"></partial>
+<partial name="_PopularCoursesPartial" model="Model.Courses"></partial>

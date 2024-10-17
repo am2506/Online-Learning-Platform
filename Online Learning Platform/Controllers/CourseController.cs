@@ -2,6 +2,7 @@
 using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Repository.Interfaces;
 using Online_Learning_Platform.Repository.Repository;
+using Online_Learning_Platform.ViewModels;
 
 namespace Online_Learning_Platform.Controllers
 {
@@ -19,30 +20,37 @@ namespace Online_Learning_Platform.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string searchTerm)
+        public async Task<IActionResult> Index(string searchTerm, int? categoryId)
         {
 			IEnumerable<Course> courses;
+			courses = await _courseRepository.GetWithIncludesAsync(
+				c => c.Instructor,
+				c => c.Category
+			);
+
+			
+
+			if (categoryId.HasValue)
+			{
+				courses = courses.Where(c => c.CategoryId == categoryId.Value);
+			}
+
 			if (!string.IsNullOrEmpty(searchTerm))
 			{
-				courses = await _courseRepository.GetWithIncludesAsync(
-					c => c.Instructor,
-					c => c.Category
-				);
-
 				courses = courses.Where(c => c.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-											 (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm, StringComparison.OrdinalIgnoreCase)||
-											 c.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+											  (c.Instructor.FirstName + " " + c.Instructor.LastName).Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+											  c.Category.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
 				);
 			}
-			else
+
+			var viewModel = new CourseIndexViewModel
 			{
-				courses = await _courseRepository.GetWithIncludesAsync(
-					c => c.Instructor,
-					c => c.Category
-				);
-			}
-			return View(courses);
-        }
+				Courses = courses,
+				Categories = await _categoryRepository.GetAllAsync() // Assuming you have this method
+			};
+
+			return View(viewModel);
+		}
 
         public async Task<IActionResult> CategoryIndex()
         {
@@ -52,13 +60,13 @@ namespace Online_Learning_Platform.Controllers
             return View(categories);
         }
 
-		public async Task<IActionResult> InstructorIndex()
-		{
-			IEnumerable<Instructor> instructors = await _instructorRepository.GetWithIncludesAsync(
-				c => c.Courses
-			);
-			return View(instructors);
-		}
+		//public async Task<IActionResult> InstructorIndex()
+		//{
+		//	IEnumerable<Instructor> instructors = await _instructorRepository.GetWithIncludesAsync(
+		//		c => c.Courses
+		//	);
+		//	return View(instructors);
+		//}
 
 	}
 

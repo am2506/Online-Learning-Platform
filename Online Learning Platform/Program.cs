@@ -18,10 +18,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
-// Configure
-builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
-	.AddEntityFrameworkStores<ApplicationDbContext>()
-	.AddDefaultTokenProviders();
+//// Configure
+//builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
+//	.AddEntityFrameworkStores<ApplicationDbContext>()
+//	.AddDefaultTokenProviders();
 
 
 
@@ -36,8 +36,13 @@ builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 	.AddDefaultTokenProviders();
 
 
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+//builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IGenericRepository<Instructor>), typeof(GenericRepository<Instructor>));
+builder.Services.AddScoped(typeof(IGenericRepository<Course>), typeof(GenericRepository<Course>));
+builder.Services.AddScoped(typeof(IGenericRepository<Category>), typeof(GenericRepository<Category>));
+builder.Services.AddScoped(typeof(IGenericRepository<Student>), typeof(GenericRepository<Student>));
+builder.Services.AddScoped(typeof(IGenericRepository<Lesson>), typeof(GenericRepository<Lesson>));
+
 
 var app = builder.Build();
 

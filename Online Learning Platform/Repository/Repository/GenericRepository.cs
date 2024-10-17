@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Online_Learning_Platform.Models;
 using Online_Learning_Platform.Models.Data;
 using Online_Learning_Platform.Repository.Interfaces;
 using System.Linq.Expressions;
@@ -55,5 +56,7 @@ namespace Online_Learning_Platform.Repository.Repository
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
-    }
+
+		
+	}
 }
