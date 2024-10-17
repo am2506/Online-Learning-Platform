@@ -48,10 +48,10 @@ namespace Online_Learning_Platform.Controllers
 
             }
             ModelState.AddModelError("", "Invalid Email or Password");
-            return View();
+            return View(model);
         }
         #endregion
-        //============== Sign up Region ================	
+        //============== Sign up Region ===============	
         #region SignUp
         public IActionResult SignUp()
         {
@@ -78,7 +78,8 @@ namespace Online_Learning_Platform.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Email = model.Email,
-                    UserName = model.Email.Split('@')[0]
+                    UserName = model.Email.Split('@')[0],
+                    RoleName = Role
                 };
                 var NewUser = await _userManager.CreateAsync(user, model.Password);
                 if (NewUser.Succeeded)
@@ -95,9 +96,10 @@ namespace Online_Learning_Platform.Controllers
                 }
                 return View(model);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest("Error at signup");
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
             }
 
         }

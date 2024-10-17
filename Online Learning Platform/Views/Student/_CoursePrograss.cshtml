@@ -1,0 +1,25 @@
+﻿@model int
+ @inject ICourseRepository CourseRepository
+ 
+ @{
+    var Courses = await CourseRepository.GetEnrollmentsWithProgress(Model);
+}
+<div class="col-md-12">
+    <div class="card mb-4 mb-md-0">
+        <div class="card-body">
+            <p class="mb-4">
+                <h1 class="text-primary me-1">Course Progress</h1> Courses
+            </p>
+            @foreach (var item in Courses)
+			{
+             <p class="mb-1" style="font-size: .77rem;">@item.CourseTitle</p>
+            <div class="progress rounded" style="height: 5px;">
+                <div class="progress-bar" role="progressbar" style="width: @item.Progress%" aria-valuenow="80"
+                     aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+			
+			}
+            
+        </div>
+    </div>
+</div>

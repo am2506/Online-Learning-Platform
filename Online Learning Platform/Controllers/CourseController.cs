@@ -14,7 +14,7 @@ namespace Online_Learning_Platform.Controllers
             _coursesRepo = coursesRepo;
         }
 
-        public async Task<IActionResult> Index(string ?SearchItem)
+        public async Task<IActionResult> Index(string ? SearchItem)
         {
             var courses = Enumerable.Empty<Course>();
             if (string.IsNullOrEmpty(SearchItem))
@@ -23,7 +23,7 @@ namespace Online_Learning_Platform.Controllers
             }
             else
             {
-                courses = _coursesRepo.SearchByNameAsync(SearchItem);
+                courses =  _coursesRepo.SearchByNameAsync(SearchItem);
             }
             return View(courses);
             
