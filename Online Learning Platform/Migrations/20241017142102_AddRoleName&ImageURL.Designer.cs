@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Learning_Platform.Models.Data;
 
@@ -11,9 +12,11 @@ using Online_Learning_Platform.Models.Data;
 namespace Online_Learning_Platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241017142102_AddRoleName&ImageURL")]
+    partial class AddRoleNameImageURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,14 +275,13 @@ namespace Online_Learning_Platform.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EnrollmentDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<int>("Prograss")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.HasKey("StudentId", "CourseId");
 
@@ -293,6 +295,7 @@ namespace Online_Learning_Platform.Migrations
                             StudentId = 1,
                             CourseId = 1,
                             EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 1,
                             Prograss = 0
                         },
                         new
@@ -300,6 +303,7 @@ namespace Online_Learning_Platform.Migrations
                             StudentId = 1,
                             CourseId = 2,
                             EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = 2,
                             Prograss = 50
                         });
                 });
@@ -470,7 +474,7 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc0c454a-6f96-47f9-b344-d80034e21b20",
+                            ConcurrencyStamp = "67f88711-4d19-4b03-a4e8-2ad73b2ba45e",
                             Email = "Heba@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Heba",
@@ -484,7 +488,7 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a35c4ae6-85fb-4f55-883c-0d53cc5c8250",
+                            ConcurrencyStamp = "56ae2993-1fe5-47e5-9723-313180b2318e",
                             Email = "Shahd@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Shahd",

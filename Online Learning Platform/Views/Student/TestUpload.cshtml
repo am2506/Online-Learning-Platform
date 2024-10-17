@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "TestUpload";
+}
+
+<div class="col-4">
+
+    <form method="post" enctype="multipart/form-data" asp-action="TestUpload">
+    <div class="mb-3">
+        <input type="file" name="file" class="form-control" />
+
+    </div>
+    <div class="mb-3">
+        <input type="submit" name="name" value="Upload file" />
+
+    </div>    
+    </form>
+</div>
+

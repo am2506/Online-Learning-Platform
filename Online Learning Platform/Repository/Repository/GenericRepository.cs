@@ -7,7 +7,7 @@ namespace Online_Learning_Platform.Repository.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly ApplicationDbContext _context;
+        private protected readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(ApplicationDbContext context)

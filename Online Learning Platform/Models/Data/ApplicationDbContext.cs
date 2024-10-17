@@ -14,21 +14,16 @@ namespace Online_Learning_Platform.Models.Data
 			builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 			base.OnModelCreating(builder);
 
+            #region Seeding Data
             builder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Programming" },
-                new Category { Id = 2, Name = "Mathematics" },
-                new Category { Id = 3, Name = "Science" }
-            );
-
-
-
+                 new Category { Id = 1, Name = "Programming" },
+                 new Category { Id = 2, Name = "Mathematics" },
+                 new Category { Id = 3, Name = "Science" }
+             );
             builder.Entity<Instructor>().HasData(
-                new Instructor { Id = 1, FirstName = "Heba", LastName = "Mohammed", Email = "Heba@gmail.com" },
-                new Instructor { Id = 2, FirstName = "Shahd", LastName = "Sofy", Email = "Shahd@gmail.com" }
+                new Instructor { Id = 1, FirstName = "Heba", LastName = "Mohammed", Email = "Heba@gmail.com", RoleName = "Instructor" },
+                new Instructor { Id = 2, FirstName = "Shahd", LastName = "Sofy", Email = "Shahd@gmail.com", RoleName = "Instructor" }
             );
-
-
-
             builder.Entity<Course>().HasData(
                 new Course
                 {
@@ -63,30 +58,22 @@ namespace Online_Learning_Platform.Models.Data
                     CategoryId = 1,
                     InstructorId = 1
                 }
-
-
             );
-
-
-
             builder.Entity<Lesson>().HasData(
-                new Lesson { Id = 1, CourseId = 1, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 2, CourseId = 1, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 3, CourseId = 2, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 4, CourseId = 2, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 5, CourseId = 3, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 6, CourseId = 3, VideoUrl = "/videos/video.mp4" },
-                new Lesson { Id = 7, CourseId = 3, VideoUrl = "/videos/video.mp4" }
+               new Lesson { Id = 1, CourseId = 1, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 2, CourseId = 1, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 3, CourseId = 2, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 4, CourseId = 2, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 5, CourseId = 3, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 6, CourseId = 3, VideoUrl = "/videos/video.mp4" },
+               new Lesson { Id = 7, CourseId = 3, VideoUrl = "/videos/video.mp4" }
 
 
-            );
-
-
-
+           );
             builder.Entity<Enrollment>().HasData(
                 new Enrollment
                 {
-                    Id = 1,
+                   
                     CourseId = 1,
                     StudentId = 1,
                     Prograss = 0,
@@ -94,14 +81,14 @@ namespace Online_Learning_Platform.Models.Data
                 },
                 new Enrollment
                 {
-                    Id = 2,
+                   
                     CourseId = 2,
                     StudentId = 1,
                     Prograss = 50,
                     EnrollmentDate = new DateTime(2024, 9, 27)
                 }
-            );
-
+            ); 
+            #endregion
 
         }
 

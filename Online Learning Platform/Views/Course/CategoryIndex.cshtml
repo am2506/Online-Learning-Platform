@@ -9,22 +9,23 @@
 			<div class="home_background prlx" style="background-image:url(/images/courses_background.jpg)"></div>
 		</div>
 		<div class="home_content">
-			<h1>Courses</h1>
+			<h1>Category</h1>
 		</div>
 	</div>
 
-	@foreach(var cat in Model){
-	<div class="popular page_section">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title text-center">
+	@foreach (var cat in Model)
+	{
+		<div class="popular page_section">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="section_title text-center">
 							<h1>@cat.Name Courses</h1>
+						</div>
 					</div>
 				</div>
-			</div>
-		
-			
+
+
 				<div class="row course_boxes">
 					@foreach (var course in cat.Courses)
 					{
@@ -38,9 +39,9 @@
 								</div>
 								<div class="price_box d-flex flex-row align-items-center">
 									@* <div class="course_author_image">
-										<img src="@course.Instructor.ImageUrl" alt="instructor image">
-									</div>
-									<div class="course_author_name">@course.Instructor.FirstName @course.Instructor.LastName, <span>Instructor</span></div> *@
+							<img src="@course.Instructor.ImageUrl" alt="instructor image">
+							</div>
+							<div class="course_author_name">@course.Instructor.FirstName @course.Instructor.LastName, <span>Instructor</span></div> *@
 									<div class="course_price d-flex flex-column align-items-center justify-content-center"><span>$29</span></div>
 								</div>
 							</div>
@@ -49,9 +50,10 @@
 
 
 				</div>
-		
+
+			</div>
 		</div>
-	</div>}
+	}
 </div>
 
 <script src="~/js/courses_custom.js"></script>

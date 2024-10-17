@@ -21,9 +21,9 @@ namespace Online_Learning_Platform.Controllers
 			this.signInManager = signInManager;
 			this.enrollmentRepository = enrollmentRepository;
         }
-        public IActionResult Enroll(int Id)
+        public async Task<IActionResult> Enroll(int Id)
 		{
-			Course course=courseRepository.GetCourseById(Id);
+			Course course= await courseRepository.GetByIdAsync(Id);
             
             return View( course);
 		}
