@@ -25,6 +25,15 @@ namespace Online_Learning_Platform.Repository.Repository
 				.Include(c => c.Category)
 				.ToListAsync();
 		}
+
+		public async Task<Course> GetCourseById(int id)
+		{
+			return await _context.Courses
+				.Include(u => u.Lessons)
+				.Include(x => x.Category)
+				.Include(d => d.Instructor)
+				.FirstOrDefaultAsync(c => c.Id == id);
+		}
 		public IQueryable<Course> CoursesOfUser(int Id)
         {
             var UserCourse = _context.Enrollments

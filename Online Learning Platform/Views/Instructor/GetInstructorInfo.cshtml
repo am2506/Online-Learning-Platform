@@ -8,18 +8,18 @@
 
 
 
-<html>
+ <html>
 <head>
 
 </head>
 <body>
-    <section class="py-5">
+    <section class="py-5" >
         <div class="container" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;">
             <div class="row gx-5">
                 <aside class="col-lg-6">
                     <div class="border rounded-4 mb-3 d-flex justify-content-center" style="margin-top: 1rem !important">
                         <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
-                            @* <img style="max-width: 100%; max-height: 100vh; margin-top: 10px;border-radius:8px;" class="rounded-4 fit" src="@Model.ImageUrl" /> *@
+                            <img style="max-width: 100%; max-height: 100vh; margin-top: 10px;border-radius:8px;" class="rounded-4 fit" src="@Model.ImageUrl" />
                         </a>
                     </div>
 
@@ -29,7 +29,7 @@
                 <main class="col-lg-6" style="margin-top: 1rem !important">
                     <div class="ps-lg-3">
                         <h4 @* class="title text-dark" *@ style="font-size:40px;color:#286099">
-                            @Model.FirstName @Model.LastName  &nbsp;  <a href="mailto:@Model.Email">
+                            @Model.FirstName @Model.LastName  &nbsp;  <a href="mailto:@Model.Email" >
                                 <i class="bi bi-envelope-at"></i>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
                                     <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z" />
@@ -38,7 +38,7 @@
                             </a>
 
                         </h4>
-
+                   
                         <p style="color:#111112;">
                             I'm an online instructor , I built up my expertise thanks to years of experience with startups and investments, and I'm using the scientific method in business in order to find innovative approaches and doing a lot of research to uncover winning patterns among the most successful companies in the world.
                         </p>
@@ -49,32 +49,36 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-play-circle-    fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.50    00   0-.814z" />
                             </svg>
-                            Courses
+                             Courses
                         </p>
 
                         <div style="box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; margin-left:10px;padding:10px;color:black;">
                             <ul>
-                                @foreach (var item in Model.Courses)
-                                {
-                                    <li>@item.Title</li>
-                                    <hr />
-                                }
+                            @foreach(var item in Model.Courses)
+                            {
+                                <li>@item.Title</li>
+                                <hr />
+                            }
                             </ul>
 
                         </div>
 
 
 
+                       
+                        
+                            
 
-
-
+                     </div>     
 
                     </div>
-
+                </main>
             </div>
-            </main>
-        </div>
         </div>
     </section>
 </body>
 </html>
+
+
+
+ 

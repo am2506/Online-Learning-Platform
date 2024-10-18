@@ -9,7 +9,7 @@ namespace Online_Learning_Platform.Repository.Interfaces
     {
         Task<IEnumerable<Course>> GetAllCoursesAsync();
 
-        //Course GetCourseById (int id); 
+        Task<Course> GetCourseById (int id); 
 
         IQueryable<Course> SearchByNameAsync(string name);
         IQueryable<Course> CoursesOfUser(int Id);

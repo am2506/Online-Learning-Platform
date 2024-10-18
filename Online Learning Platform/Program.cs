@@ -27,11 +27,22 @@ builder.Services.AddScoped(typeof(IGenericRepository<Course>), typeof(GenericRep
 //builder.Services.AddScoped(typeof(IGenericRepository<Student>), typeof(GenericRepository<Student>));
 //builder.Services.AddScoped(typeof(IGenericRepository<Lesson>), typeof(GenericRepository<Lesson>));
 
+builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 
 // Configure
 builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 	.AddEntityFrameworkStores<ApplicationDbContext>()
 	.AddDefaultTokenProviders();
+
+
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = "/Auth/Login";
+    config.AccessDeniedPath = "/Auth/AccessDenied";
+    config.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+});
 
 var app = builder.Build();
 

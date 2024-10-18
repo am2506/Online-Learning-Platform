@@ -263,6 +263,89 @@ namespace Online_Learning_Platform.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Online_Learning_Platform.Models.DevData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Fayoum ,Egypt");
+
+                    b.Property<string>("College")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Job")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Full Stack .Net Developer");
+
+                    b.Property<string>("LinkedinUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DevData");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/avatar7.png",
+                            LinkedinUrl = "https://www.linkedin.com/in/a7medmansour/",
+                            Name = "Ahmed Mansour"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            College = "Faculty of Engineering",
+                            ImageUrl = "/images/avatar7.png",
+                            LinkedinUrl = "#",
+                            Name = "Mohamed Khaled"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/heba-muhammad-64768924a/",
+                            Name = "Heba Mohamed"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/nisreen-nasr-295079222/",
+                            Name = "Nisreen Nasr"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            College = "Faculty of Computer and Information",
+                            ImageUrl = "/images/images (1).jpeg",
+                            LinkedinUrl = "https://www.linkedin.com/in/shahd-sofy-6573742a7/",
+                            Name = "Shahd Sofy"
+                        });
+                });
+
             modelBuilder.Entity("Online_Learning_Platform.Models.Enrollment", b =>
                 {
                     b.Property<int>("StudentId")
@@ -463,6 +546,10 @@ namespace Online_Learning_Platform.Migrations
                 {
                     b.HasBaseType("Online_Learning_Platform.Models.UserBase");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasDiscriminator().HasValue("Instructor");
 
                     b.HasData(
@@ -470,29 +557,29 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc0c454a-6f96-47f9-b344-d80034e21b20",
+                            ConcurrencyStamp = "5d08c359-45ba-4d81-9dd0-219131ba6ba2",
                             Email = "Heba@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Heba",
                             LastName = "Mohammed",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            RoleName = "Instructor",
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            ImageUrl = "/images/teacher_1.jpg"
                         },
                         new
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a35c4ae6-85fb-4f55-883c-0d53cc5c8250",
+                            ConcurrencyStamp = "f1971258-e8d5-4906-b824-96b32dcc0e5d",
                             Email = "Shahd@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Shahd",
                             LastName = "Sofy",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            RoleName = "Instructor",
-                            TwoFactorEnabled = false
+                            TwoFactorEnabled = false,
+                            ImageUrl = "/images/teacher_4.jpg"
                         });
                 });
 

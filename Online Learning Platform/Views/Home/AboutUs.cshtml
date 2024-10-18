@@ -1,5 +1,52 @@
-﻿
+﻿@model List<DevData>
 @{
-    ViewData["Title"] = "AboutUs";
+	ViewData["Title"] = "AboutUs";
 }
 <partial name="_HomePartialView" />
+
+<html>
+     <head>
+		 <style>
+		body {
+			margin-top: 20px;
+			color: #1a202c;
+			text-align: left;
+			background-color: #e2e8f0;
+			margin-left: 0px;
+		}
+			 .container
+			 {
+				 max-width:800px;
+			 }
+
+		
+		 </style>
+     </head> 
+<body>
+	<div class="container" >
+		<div class="row course_boxes">
+
+			@foreach (var item in Model)
+			{
+				<div class="card" style=" margin-left:15px; width:250px;margin-top:20px;">
+					<div class="card-body">
+						<div class="d-flex flex-column align-items-center text-center">
+							<img src="@item.ImageUrl" alt="Admin" class="rounded-circle" width="150">
+							<div class="mt-3" >
+								<h4 style="font-weight:bold;color:black;">@item.Name</h4>
+								<p style="color:#050505" class="text-secondary mb-1">@item.Job</p>
+								<p class="text-muted font-size-sm" style="color:#050505">@item.Address</p>
+								<p class="text-muted font-size-sm">@item.College</p>
+								<a href="@item.LinkedinUrl" class="btn btn-primary">Follow</a>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+
+
+	</div>
+	</div>
+  </body>
+</html>

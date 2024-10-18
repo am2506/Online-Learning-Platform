@@ -1,4 +1,4 @@
-﻿ @model Course
+﻿@model Course
 
 @{
     ViewData["Title"] = "Course Enrollment";
@@ -8,142 +8,83 @@
 
 <html>
     <head>
-    <style>
-        .enroll-button {
-            background-color: rgb(39, 41, 108);
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            margin-top: 20px;
-            margin-left: 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .enroll-button:hover {
-                background-color: rgb(92, 94, 151);
-              color:white;
-            transform: scale(1.05); 
-        }
-
-        .title
-        {
-            margin-top: 30px;
-            margin-bottom: 30px;
-            color: rgb(39, 41, 108);
-            font-weight: bold;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            box-shadow: 10px 10px 5px White;
-        }
-
-        .bigcontainer
-        {
-            display: flex;
-            margin-left: 40px;
-            /* background: white; */
-            overflow: hidden;
-            max-width: 80%;
-        }
-        .imgcontainer
-        {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .imgcontainer img{
-                max-width: 100%;
-                height: auto;
-                border-radius: 8px;
-        }
-
-        .textcontainer
-        {
-            margin-left: 80px;
-            padding: 20px;
-            flex: 1;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background: #f8f9fa;
-            max-width:500px;
-        }
-        .textcontainer p
-        {
-                font-weight: bold;
-                color: black;
-                font-size: 40px;
-        }
-        .textcontainer ul{
-                margin-left: 30px;
-                color: #009999;
-                line-height: 40px;
-                font-weight: bold;
-                font-size: 20px;
-        }
-        .details
-        {
-            margin-left: 40px;
-            margin-top: 30px;
-        }
-        .details h2
-        {
-                font-weight: bold;
-                color: black;
-                font-size: 30px;
-        }
-        .details p
-        {
-                margin-left: 40px;
-                font-size: 25px;
-                color: #009999;
-        }
-    </style>
 
     </head>
-
     <body>
-    <div class="title">
-        <h1>@Model.Title</h1>
-    </div>
+    <section class="py-5">
+        <div class="container">
+            <div class="row gx-5">
+                <aside class="col-lg-6">
+                    <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                        <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
+                            <img style="max-width: 100%; max-height: 100vh; margin: auto;border-radius:8px;" class="rounded-4 fit" src="~/images/course_1.jpg" />
+                        </a>
+                    </div>
 
-    <div class="bigcontainer">
-        <div class="imgcontainer">
-            <img src="~/images/course_1.jpg"  />
+
+
+                </aside>
+                <main class="col-lg-6">
+                    <div class="ps-lg-3">
+                        <h4 class="title text-dark" style="font-size:40px;">
+                            @Model.Title
+
+                        </h4>
+                        <div class="d-flex flex-row my-3">
+                            <div class="text-warning mb-1 me-2">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ms-1">
+                                    4.5
+                                </span>
+                            </div>
+
+                        </div>
+
+
+
+                        <p style="font-size:25px;color:#30265C;line-height:30px;">
+                            @Model.Description
+                        </p>
+
+                        <div class="row" style="color: #009999; font-size: 20px;">
+                            <dt class="col-3">Category:</dt>
+                            <dd class="col-9">@Model.Category.Name</dd>
+
+                            <dt class="col-3">Instructor: </dt>
+                            <dd class="col-9">@Model.Instructor.FirstName @Model.Instructor.LastName</dd>
+
+                            <dt class="col-3">Lessons:</dt>
+                            <dd class="col-9">@Model.Lessons.Count() Lessons</dd>
+
+                            <dt class="col-3">Duration:</dt>
+                            <dd class="col-9">@Model.Duration</dd>
+
+
+
+                            <dt class="col-5">Number of Lectures:</dt>
+                            <dd class="col-13">@Model.TotalLecture</dd>
+                           
+                        </div>
+
+                        <hr />
+
+
+
+                        <a style="font-weight: bold;font-size: 20px;" asp-controller="Enrollment" asp-action="Save" asp-route-courseid="@Model.Id" class="btn btn-warning shadow-0"> Enroll now </a>
+
+                    </div>
+                </main>
+            </div>
         </div>
-
-        <div class="textcontainer">
-            <p>This Course Includes:</p>
-            <ul>
-                <li>Instructor Name: @Model.Instructor.FirstName @Model.Instructor.LastName</li>
-                <li>Course Category: @Model.Category.Name</li>
-                <li>@Model.Duration Hours </li>
-                <li>@Model.Lessons.Count() Lessons</li>
-                <li>Downloadable Resources</li>
-                <li>Full Time Access</li>
-                <li>Access On Mobile and TV</li>
-                <li>Assignments</li>
-                <li>Certificate Of Completion</li>
-
-            </ul>
-            <a class="enroll-button" asp-controller="Enrollment" asp-action="Save" asp-route-courseid="@Model.Id">Enroll Now</a>
-        </div>
-    </div>
-
-    <div class="details" >
-        <h2>Course Description</h2>
-        <p>@Model.Description</p>
-    </div>
-
+    </section>
     </body>
 </html>
 
 
 
-   
 
-   
-    
 

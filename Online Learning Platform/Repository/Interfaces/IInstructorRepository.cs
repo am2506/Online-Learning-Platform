@@ -1,6 +1,9 @@
-﻿namespace Online_Learning_Platform.Repository.Interfaces
+﻿using Online_Learning_Platform.Models;
+
+namespace Online_Learning_Platform.Repository.Interfaces
 {
-	public interface IInstructorRepository
-	{
-	}
+    public interface IInstructorRepository
+    {
+        Instructor GetById (int id);
+    }
 }
