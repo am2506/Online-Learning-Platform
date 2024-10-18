@@ -32,13 +32,14 @@
 							</div>
 							<div class="price_box d-flex flex-row align-items-center">
 								<div class="course_author_image">
-						<img src="@course.Instructor.ImageUrl" alt="instructor image">
-						</div>
+									<img src="@course.Instructor.ImageUrl" alt="instructor image">
+
+								</div>
 								<div class="course_author_name">
 									@course.Instructor.FirstName @course.Instructor.LastName,		<span>Instructor</span>
 
 								</div>
-								
+
 								<div class="course_price d-flex flex-column align-items-center justify-content-center" style="width:80px;">
 									<a asp-controller="Enrollment" asp-action="Enroll" asp-route-Id="@course.Id" style="color:white;">Enroll Now</a>
 								</div>

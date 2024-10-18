@@ -1,0 +1,31 @@
+﻿<!-- MY Courses -->
+
+<div class="popular page_section">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="section_title text-center">
+					<h1>@ViewData["Title"]</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row course_boxes">
+			@foreach (var course in Model)
+			{
+				<!-- Popular Course Item -->
+				<div class="col-lg-4 course_box">
+					<div class="card">
+						<img class="card-img-top" src="@course.ImageUrl" alt="https://unsplash.com/kellybrito">
+						<div class="card-body text-center">
+							<div class="card-title"><a href="">@course.Title</a></div>
+							<div class="card-text" style="height:5rem; overflow:hidden;" title="Hover to see full description">@course.Description</div>
+						</div>
+						
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+</div>

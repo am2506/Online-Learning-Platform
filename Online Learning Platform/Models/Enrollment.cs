@@ -7,8 +7,8 @@
 		public int StudentId { get; set; }
 		public int Prograss { get; set; }
 		public DateTime EnrollmentDate { get; set; }
-		public Student Student { get; set; }
-		public Course Course { get; set; }
+		public Student ?Student { get; set; }
+		public Course ?Course { get; set; }
 
 
 

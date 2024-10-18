@@ -1,0 +1,52 @@
+﻿.admin-wrapper {
+    display: flex;
+}
+
+.admin-sidebar {
+    width: 200px;
+    background-color: #343a40;
+    color: white;
+    padding: 15px;
+}
+
+    .admin-sidebar .sidebar-menu {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .admin-sidebar .sidebar-menu li {
+            margin: 10px 0;
+        }
+
+            .admin-sidebar .sidebar-menu li a {
+                color: white;
+                text-decoration: none;
+            }
+
+.admin-content {
+    padding: 20px;
+    flex: 1;
+}
+
+.admin-header {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.dashboard-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.dashboard-links a {
+    margin: 5px;
+}

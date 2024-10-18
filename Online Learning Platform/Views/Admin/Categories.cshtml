@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Online_Learning_Platform.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+<a asp-action="AddCategory" class="btn btn-primary">Add Category</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Category in Model)
+        {
+            <tr>
+                <td>@Category.Id</td>
+                <td>@Category.Name</td>
+
+               
+                <td>
+                    <a asp-action="EditCategory" asp-route-id="@Category.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="DeleteCategory" asp-route-id="@Category.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

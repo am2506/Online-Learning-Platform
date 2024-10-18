@@ -29,8 +29,6 @@ namespace Online_Learning_Platform.Controllers
 				c => c.Category
 			);
 
-			
-
 			if (categoryId.HasValue)
 			{
 				courses = courses.Where(c => c.CategoryId == categoryId.Value);

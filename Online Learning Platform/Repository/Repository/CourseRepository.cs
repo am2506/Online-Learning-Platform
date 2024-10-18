@@ -38,7 +38,7 @@ namespace Online_Learning_Platform.Repository.Repository
         {
             var UserCourse = _context.Enrollments
                 .Include(C => C.Course)
-                .Include(S => S.Student)
+                .Include(S => S.Student)               
                 .Where(e => e.StudentId == Id)
                 .Select(e => e.Course);
             return UserCourse;

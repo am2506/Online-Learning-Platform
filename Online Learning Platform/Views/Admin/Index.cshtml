@@ -1,0 +1,159 @@
+﻿
+  @model Online_Learning_Platform.Models.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body" class="dashboard-links">
+                <h5>Total Users</h5>
+                <p>@Model.TotalUsers</p>
+                <a class="btn btn-primary" href="@Url.Action("Users", "Admin")">Manage Users</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body" class="dashboard-links">
+                <h5>Total Courses</h5>
+                <p>@Model.TotalCourses</p>
+                <a class="btn btn-primary" href="@Url.Action("Courses", "Admin")">Manage Courses</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body" class="dashboard-links">
+                <h5>Total Enrollments</h5>
+                <p>@Model.TotalEnrollments</p>
+                <a class="btn btn-primary" href="@Url.Action("Enrollments", "Admin")">Manage Enrollments</a>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body" class="dashboard-links">
+                <h5>Total Categories</h5>
+                <p>@Model.TotalCategories</p>
+                <a class="btn btn-primary" href="@Url.Action("Categories", "Admin")">Manage Categories</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<style>
+    
+    canvas {
+        width: 80% !important;  
+        height: 600px !important; 
+    }
+</style>
+
+<!-- User Roles Chart -->
+<h3>User Roles Distribution</h3>
+<canvas id="userRolesChart"></canvas>
+<script>
+    var userRolesCtx = document.getElementById('userRolesChart').getContext('2d');
+    var userRolesChart = new Chart(userRolesCtx, {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.UserRoles)),
+            datasets: [{
+                label: 'Users per Role',
+                data: @Html.Raw(Json.Serialize(Model.RoleCounts)),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+            }]
+        }
+    });
+</script>
+
+<!-- Courses by Category Chart -->
+<h3>Courses by Category</h3>
+<canvas id="coursesByCategoryChart"></canvas>
+<script>
+    var coursesByCategoryCtx = document.getElementById('coursesByCategoryChart').getContext('2d');
+    var coursesByCategoryChart = new Chart(coursesByCategoryCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.Categories)),
+            datasets: [{
+                label: 'Courses per Category',
+                data: @Html.Raw(Json.Serialize(Model.CategoryCounts)),
+                backgroundColor: '#36A2EB'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Course Enrollment Chart -->
+<h3>Course Enrollments</h3>
+<canvas id="courseEnrollmentsChart"></canvas>
+<script>
+    var courseEnrollmentsCtx = document.getElementById('courseEnrollmentsChart').getContext('2d');
+    var courseEnrollmentsChart = new Chart(courseEnrollmentsCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.CourseTitles)),
+            datasets: [{
+                label: 'Enrollments per Course',
+                data: @Html.Raw(Json.Serialize(Model.CourseEnrollmentCounts)),
+                backgroundColor: '#FFCE56'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Enrollment Trends Chart -->
+<h3>Daily Enrollment Trends</h3>
+<canvas id="enrollmentTrendsChart"></canvas>
+<script>
+    var enrollmentTrendsCtx = document.getElementById('enrollmentTrendsChart').getContext('2d');
+    var enrollmentTrendsChart = new Chart(enrollmentTrendsCtx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(Model.EnrollmentDates)),
+            datasets: [{
+                label: 'Enrollments per Day',
+                data: @Html.Raw(Json.Serialize(Model.DailyEnrollments)),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+

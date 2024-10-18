@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+#region IRepositories 
 // Add Repositories
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -22,27 +23,30 @@ builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 //builder.Services.AddScoped(typeof(IGenericRepository<Instructor>), typeof(GenericRepository<Instructor>));
-builder.Services.AddScoped(typeof(IGenericRepository<Course>), typeof(GenericRepository<Course>));
+//builder.Services.AddScoped(typeof(IGenericRepository<Course>), typeof(GenericRepository<Course>));
 //builder.Services.AddScoped(typeof(IGenericRepository<Category>), typeof(GenericRepository<Category>));
 //builder.Services.AddScoped(typeof(IGenericRepository<Student>), typeof(GenericRepository<Student>));
 //builder.Services.AddScoped(typeof(IGenericRepository<Lesson>), typeof(GenericRepository<Lesson>));
 
 builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 
-// Configure
+#endregion
+
+
+#region Identity Configuration
+		// Configure
 builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
 	.AddEntityFrameworkStores<ApplicationDbContext>()
 	.AddDefaultTokenProviders();
 
-
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-
 builder.Services.ConfigureApplicationCookie(config =>
 {
-    config.LoginPath = "/Auth/Login";
-    config.AccessDeniedPath = "/Auth/AccessDenied";
-    config.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-});
+	config.LoginPath = "/Auth/Login";
+	config.AccessDeniedPath = "/Auth/AccessDenied";
+	config.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+}); 
+#endregion
+
 
 var app = builder.Build();
 
