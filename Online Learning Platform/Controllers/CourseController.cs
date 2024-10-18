@@ -46,7 +46,7 @@ namespace Online_Learning_Platform.Controllers
 			var viewModel = new CourseIndexViewModel
 			{
 				Courses = courses,
-				Categories = await _categoryRepository.GetAllAsync() // Assuming you have this method
+				Categories = await _categoryRepository.GetAllAsync() 
 			};
 
 			return View(viewModel);
@@ -60,13 +60,7 @@ namespace Online_Learning_Platform.Controllers
             return View(categories);
         }
 
-		//public async Task<IActionResult> InstructorIndex()
-		//{
-		//	IEnumerable<Instructor> instructors = await _instructorRepository.GetWithIncludesAsync(
-		//		c => c.Courses
-		//	);
-		//	return View(instructors);
-		//}
+
 
 	}
 

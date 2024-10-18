@@ -7,5 +7,6 @@ namespace Online_Learning_Platform.Models
 		
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
+		public string? ImageUrl { get; set; }
 	}
 }
