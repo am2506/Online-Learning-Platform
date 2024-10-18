@@ -30,11 +30,7 @@ namespace Online_Learning_Platform.Models.Data
             builder.ApplyConfiguration(new LessonConfiguration());
             builder.ApplyConfiguration(new EnrollmentConfiguration());
             builder.ApplyConfiguration(new CourseConfiguration());
-            //builder.Entity<Course>()
-            //    .HasOne(c => c.Instructor)
-            //    .WithMany(i => i.Courses)
-            //    .HasForeignKey(c => c.InstructorId);
-
+         
             // Seed roles (for example, Admin, Instructor)
             builder.Entity<IdentityRole<int>>().HasData(
                 new IdentityRole<int> { Id = 1, Name = "Admin", NormalizedName = "ADMIN" },
@@ -42,75 +38,77 @@ namespace Online_Learning_Platform.Models.Data
                 new IdentityRole<int> { Id = 3, Name = "Student", NormalizedName = "STUDENT" }
             );
 
-            // Seed instructors as Identity users
-            var hasher = new PasswordHasher<UserBase>();
-            var Users = new List<UserBase>
-            {
-                new UserBase
-                {
-                    Id = 1,
-                    UserName = "instructor1",
-                   
-                    Email = "instructor1@example.com",
-                                        RoleName="Instructor",
+            #region Draft
+            //// Seed instructors as Identity users
+            //var hasher = new PasswordHasher<UserBase>();
+            //var Users = new List<UserBase>
+            //{
+            //    new UserBase
+            //    {
+            //        Id = 1,
+            //        UserName = "instructor1",
 
-                   
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                },
-                new UserBase
-                {
-                    Id = 2,
-                    UserName = "instructor2",
-                    
-                    Email = "instructor2@example.com",
-                                        RoleName="Instructor",
+            //        Email = "instructor1@example.com",
+            //                            RoleName="Instructor",
 
-  
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                },
-                  new UserBase
-                {
-                    Id = 4,
-                    UserName = "Student1",
-                   
-                    Email = "Student1@example.com",
-                                        RoleName="Student",
 
-                   
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                },  new UserBase
-                {
-                    Id = 5,
-                    UserName = "Student2",
-                    Email = "Student2@example.com",
-                                        RoleName="Student",
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    },
+            //    new UserBase
+            //    {
+            //        Id = 2,
+            //        UserName = "instructor2",
 
-                  
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                },  new UserBase
-                {
-                    Id = 6,
-                    UserName = "Student3",
-                    Email = "Student3@example.com",
-                                        RoleName="Student",
+            //        Email = "instructor2@example.com",
+            //                            RoleName="Instructor",
 
-                
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                },
-                new UserBase
-                {
-                    Id = 3,
-                    UserName = "instructor3",
-                    Email = "instructor3@example.com",
-                    RoleName="Instructor",
-                    
-                    PasswordHash = hasher.HashPassword(null, "Password123!")
-                }
-            };
 
-            builder.Entity<UserBase>().HasData(Users);
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    },
+            //      new UserBase
+            //    {
+            //        Id = 4,
+            //        UserName = "Student1",
 
-            
+            //        Email = "Student1@example.com",
+            //                            RoleName="Student",
+
+
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    },  new UserBase
+            //    {
+            //        Id = 5,
+            //        UserName = "Student2",
+            //        Email = "Student2@example.com",
+            //                            RoleName="Student",
+
+
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    },  new UserBase
+            //    {
+            //        Id = 6,
+            //        UserName = "Student3",
+            //        Email = "Student3@example.com",
+            //                            RoleName="Student",
+
+
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    },
+            //    new UserBase
+            //    {
+            //        Id = 3,
+            //        UserName = "instructor3",
+            //        Email = "instructor3@example.com",
+            //        RoleName="Instructor",
+
+            //        PasswordHash = hasher.HashPassword(null, "Password123!")
+            //    }
+            //};
+
+            //builder.Entity<UserBase>().HasData(Users); 
+            #endregion
+
+
 
             // Seed categories (for example)
             builder.Entity<Category>().HasData(
@@ -119,6 +117,7 @@ namespace Online_Learning_Platform.Models.Data
             );
 
             // Seed courses, linking to the instructor Ids
+
             builder.Entity<Course>().HasData(
                 new Course { Id = 1, Title = "ASP.NET Core", Description = "Learn ASP.NET Core", Duration = 10, TotalLecture = 20, CategoryId = 1, InstructorId = 1 },
                 new Course { Id = 2, Title = "Entity Framework", Description = "Learn EF Core", Duration = 8, TotalLecture = 16, CategoryId = 1, InstructorId = 2 },
@@ -132,9 +131,6 @@ namespace Online_Learning_Platform.Models.Data
                 new Enrollment { Id = 4, CourseId = 1, StudentId = 5, Prograss = 80, EnrollmentDate = DateTime.Now.AddDays(-5) },
                 new Enrollment { Id = 5, CourseId = 2, StudentId = 6, Prograss = 90, EnrollmentDate = DateTime.Now.AddDays(-3) }
             );
-            //builder.Entity<UserBase>()
-            //    .Property(u => u.RowVersion)
-            //    .IsRowVersion(); // Mark as concurrency token
 
         }
 
@@ -145,9 +141,9 @@ namespace Online_Learning_Platform.Models.Data
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Lesson> Lessons { get; set; }
 		public DbSet<Enrollment> Enrollments { get; set; }
-		public DbSet<Student> Students { get; set; }
-		public DbSet<Instructor> Instructors { get; set; }
-        public DbSet<UserBase> userBases { get; set; }
+		//public DbSet<Student> Students { get; set; }
+		//public DbSet<Instructor> Instructors { get; set; }
+        //public DbSet<UserBase> userBases { get; set; }
 
 	}
 }

@@ -1,0 +1,39 @@
+﻿@* @{
+    ViewData["Title"] = "Admin Dashboard";
+}
+<h2>Admin Dashboard</h2>
+
+<ul>
+    <li><a asp-controller="Admin" asp-action="Courses">Manage Courses</a></li>
+    <li><a asp-controller="Admin" asp-action="Users">Manage Users</a></li>
+</ul>
+ *@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="dashboard-container">
+    <div class="dashboard-item">
+        <h2>Total Users</h2>
+        <p>@Model.TotalUsers</p>
+    </div>
+    <div class="dashboard-item">
+        <h2>Total Courses</h2>
+        <p>@Model.TotalCourses</p>
+    </div>
+    <div class="dashboard-item">
+        <h2>Total Categories</h2>
+        <p>@Model.TotalCategories<p>
+    </div>
+    <div class="dashboard-item">
+        <h2>Total Enrollments</h2>
+        <p>@Model.TotalEnrollments</p>
+    </div>
+
+    <div class="dashboard-links">
+        <a class="btn btn-primary" href="@Url.Action("Users", "Admin")">Manage Users</a>
+        <a class="btn btn-primary" href="@Url.Action("Courses", "Admin")">Manage Courses</a>
+        <a class="btn btn-primary" href="@Url.Action("Categories", "Admin")">Manage Categories</a>
+        <a class="btn btn-primary" href="@Url.Action("Enrollments", "Admin")">Manage Enrollments</a>
+    </div>
+</div>
