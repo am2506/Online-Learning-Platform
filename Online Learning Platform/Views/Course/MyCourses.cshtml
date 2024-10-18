@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Course>
 @{
-    ViewData["Title"] = "MyCourses";
+    ViewData["Title"] = "Your Courses";
 }
- 
+ <partial name="../Shared/_HomePartialView.cshtml" />
 @if(Model.Any())
 {
     <partial name="_MyCoursePartialView.cshtml" model="@Model" />

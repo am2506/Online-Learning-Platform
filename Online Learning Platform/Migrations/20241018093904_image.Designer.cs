@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Learning_Platform.Models.Data;
 
@@ -11,9 +12,11 @@ using Online_Learning_Platform.Models.Data;
 namespace Online_Learning_Platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241018093904_image")]
+    partial class image
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,17 +198,12 @@ namespace Online_Learning_Platform.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Programming"
+                            Name = "Development"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Mathematics"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Science"
+                            Name = "Design"
                         });
                 });
 
@@ -252,117 +250,31 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            Description = "Learn the basics of C# programming.",
-                            Duration = 10.5,
-                            ImageUrl = "/images/cSharp.png",
+                            Description = "Learn ASP.NET Core",
+                            Duration = 10.0,
                             InstructorId = 1,
-                            Title = "C# Programming",
+                            Title = "ASP.NET Core",
                             TotalLecture = 20
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 2,
-                            Description = "An advanced course on calculus and linear algebra.",
+                            CategoryId = 1,
+                            Description = "Learn EF Core",
                             Duration = 8.0,
-                            ImageUrl = "/images/math.png",
                             InstructorId = 2,
-                            Title = "Advanced Mathematics",
-                            TotalLecture = 15
+                            Title = "Entity Framework",
+                            TotalLecture = 16
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 1,
-                            Description = "Learn the basics of Python programming.",
-                            Duration = 10.5,
-                            ImageUrl = "/images/python.png",
-                            InstructorId = 1,
-                            Title = "Python Programming",
-                            TotalLecture = 20
-                        });
-                });
-
-            modelBuilder.Entity("Online_Learning_Platform.Models.DevData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Fayoum ,Egypt");
-
-                    b.Property<string>("College")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Job")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Full Stack .Net Developer");
-
-                    b.Property<string>("LinkedinUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DevData");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            College = "Faculty of Computer and Information",
-                            ImageUrl = "/images/avatar7.png",
-                            LinkedinUrl = "https://www.linkedin.com/in/a7medmansour/",
-                            Name = "Ahmed Mansour"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            College = "Faculty of Engineering",
-                            ImageUrl = "/images/avatar7.png",
-                            LinkedinUrl = "#",
-                            Name = "Mohamed Khaled"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            College = "Faculty of Computer and Information",
-                            ImageUrl = "/images/images (1).jpeg",
-                            LinkedinUrl = "https://www.linkedin.com/in/heba-muhammad-64768924a/",
-                            Name = "Heba Mohamed"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            College = "Faculty of Computer and Information",
-                            ImageUrl = "/images/images (1).jpeg",
-                            LinkedinUrl = "https://www.linkedin.com/in/nisreen-nasr-295079222/",
-                            Name = "Nisreen Nasr"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            College = "Faculty of Computer and Information",
-                            ImageUrl = "/images/images (1).jpeg",
-                            LinkedinUrl = "https://www.linkedin.com/in/shahd-sofy-6573742a7/",
-                            Name = "Shahd Sofy"
+                            Description = "Learn JavaScript",
+                            Duration = 6.0,
+                            InstructorId = 3,
+                            Title = "JavaScript Basics",
+                            TotalLecture = 12
                         });
                 });
 
@@ -375,36 +287,19 @@ namespace Online_Learning_Platform.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EnrollmentDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<int>("Prograss")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
+                        .HasColumnType("int");
 
                     b.HasKey("StudentId", "CourseId");
 
                     b.HasIndex("CourseId");
 
                     b.ToTable("Enrollments");
-
-                    b.HasData(
-                        new
-                        {
-                            StudentId = 1,
-                            CourseId = 1,
-                            EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Prograss = 0
-                        },
-                        new
-                        {
-                            StudentId = 1,
-                            CourseId = 2,
-                            EnrollmentDate = new DateTime(2024, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Prograss = 50
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Lesson", b =>
@@ -424,50 +319,6 @@ namespace Online_Learning_Platform.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Lessons");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CourseId = 1,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CourseId = 1,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CourseId = 2,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CourseId = 2,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CourseId = 3,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CourseId = 3,
-                            VideoUrl = "/videos/video.mp4"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CourseId = 3,
-                            VideoUrl = "/videos/video.mp4"
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.UserBase", b =>
@@ -498,9 +349,6 @@ namespace Online_Learning_Platform.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -564,11 +412,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a302e6f-e1f1-4c12-9d76-16fc641b69c6",
+                            ConcurrencyStamp = "88406e47-3400-439c-a0bb-2e4867bfef20",
                             Email = "instructor1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHBsaPbe2WxEbHZW2MIVu2puwTFrmu4JqJQF2zdU5dNeiW1qNJu9pXvDdTKeP4FGXQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGwW/M3oS7jEjqaGW8ECe82ZukTQwQ7/zzYEOu8rQoWBeYizzsRKDbBvUA0R7LQdRw==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
@@ -578,11 +426,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c087cccd-d783-4455-9724-fb22be3cc8a0",
+                            ConcurrencyStamp = "6d7f5ab5-c036-45ae-bd4e-48d12169f538",
                             Email = "instructor2@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEMmaGIvOm8WvkGdTpzPPLw8tcXdre/b3Jb0reublMhtWd2fx+qmkZ9geU2pKjst1Lg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMUlkkl6Sj6q89Ueo8U/Bu6qB5Li/i+bMJsCu1ewgNZQdL8CtKElJ9Xw1brkC4jUcA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
@@ -592,11 +440,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f7235288-5f1d-4c36-a85d-dec93eb2b158",
+                            ConcurrencyStamp = "11bffde5-de1a-47b3-9ed8-6e8dac594a09",
                             Email = "Student1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxHIUdcyvankAnIagm3Az4vQ31KpGKndLjK5jR7ICV3u2En36wAifp0q68E7BZk0Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH3q/rA4BZ+ydr0rXyJPDT1nQcQ3Gdf6WHeWyxI/ccG0Lhugsdng//+obFrLgaJNmA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -606,11 +454,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "363b4dd2-ef5c-44c7-9bc9-fdb624540cc9",
+                            ConcurrencyStamp = "29878d53-4b95-4a74-aa46-fb47b4cd4fce",
                             Email = "Student2@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOCbZqvojTNfk+u/92bleekkn0viItPSnYFKd0/Ni3LL/+AkJVrrH0nB5APYG+ZqMA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGA7BDO5PHO8Gd959+0ttZGhgjHkvxKDpIp7n9ApFh4TM7hoOgXM+gvacodsUbTmNA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -620,11 +468,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39f826e1-860b-484a-9a44-60eb519efabc",
+                            ConcurrencyStamp = "958a0710-59d4-4de9-948f-e3e165d46855",
                             Email = "Student3@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHZ1mEVadl5wWdaXScQKGt624ZaVPkb2dgv0CLiwSAGBANbVIvxIqNXE5GRSN1jwOw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI/ImwyZC3YSnf92BZ7U1bm3tmqCoy8Odd4y1G2A9Xv6Y4ifGvLBnQCm10q4dCWu1w==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -634,11 +482,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e466c3e6-21b0-4c31-a985-dc4f18308147",
+                            ConcurrencyStamp = "f6fb2f47-317b-4fcb-8646-a85b45788f9d",
                             Email = "instructor3@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEIgGq1EW3nSgrrfH5E4UMZmLVzJOOuI4mxS90M7FXlwOh6Cag7A+lNm0gzLhLmf6sQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENsgEmxBLdbYA5Lo2opnXaJztEm2lvWIQJ1Y9HF1UsHRVEwpG9N8z7IdsWxR8VLgEA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
@@ -650,41 +498,7 @@ namespace Online_Learning_Platform.Migrations
                 {
                     b.HasBaseType("Online_Learning_Platform.Models.UserBase");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasDiscriminator().HasValue("Instructor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d08c359-45ba-4d81-9dd0-219131ba6ba2",
-                            Email = "Heba@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Heba",
-                            LastName = "Mohammed",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            ImageUrl = "/images/teacher_1.jpg"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1971258-e8d5-4906-b824-96b32dcc0e5d",
-                            Email = "Shahd@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Shahd",
-                            LastName = "Sofy",
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            ImageUrl = "/images/teacher_4.jpg"
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Student", b =>

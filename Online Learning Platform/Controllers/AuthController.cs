@@ -43,8 +43,11 @@ namespace Online_Learning_Platform.Controllers
 
                     TempData["name"] = $"{userExist.FirstName} {userExist.LastName}";
                     TempData["img"] = "~/images/person_2.jpg";
-
+                    if(userExist.RoleName == "Instructor" || userExist.RoleName=="Admin")
+                        return RedirectToAction("Index", "Admin");
                     return RedirectToAction("Index", "Home");
+                    
+
                 }
 
             }

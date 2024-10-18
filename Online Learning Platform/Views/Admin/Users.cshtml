@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Online_Learning_Platform.Models.UserBase>
-
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 <h2>Users</h2>
 
 <a asp-action="AddUser" class="btn btn-primary">Add New User</a>

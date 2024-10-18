@@ -1,8 +1,11 @@
 ﻿@model CourseViewModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
 <h2>Add Course</h2>
 
-<form asp-action="AddCourse" method="post">
+<form asp-action="AddCourse" method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
@@ -18,9 +21,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="ImageUrl"></label>
-        <input asp-for="ImageUrl" class="form-control" />
-        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        <label asp-for="ImageFile" class="control-label">Upload Image</label>
+        <input asp-for="ImageFile" type="file" class="form-control" />
     </div>
 
     <div class="form-group">
@@ -37,18 +39,23 @@
 
     <div class="form-group">
         <label asp-for="CategoryId">Category</label>
-        <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"><option>___select Category___</option></select>
+        <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories">
+            <option value="">Select Category</option>
+        </select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="InstructorId">Instructor</label>
-        <select asp-for="InstructorId" class="form-control" asp-items="Model.Instructors"><option>___select Instructor___</option></select>
+        <select asp-for="InstructorId" class="form-control" asp-items="Model.Instructors">
+            <option value="">Select Instructor</option>
+        </select>
         <span asp-validation-for="InstructorId" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+
 
 <div>
     <a asp-action="Courses">Back to List</a>

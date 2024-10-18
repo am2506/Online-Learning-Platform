@@ -22,8 +22,6 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" asp-controller="Student" asp-action="StudentProfile" asp-route-UserName="@user.UserName"> <span class="icon icon-dashboard"></span>Your Profile</a>
                     <a class="dropdown-item" asp-controller="Course" asp-action="MyCourses" asp-route-Id="@user.Id"><span class="icon icon-people"></span>My Courses</a>
-                    <a class="dropdown-item" href="#"><span class="icon icon-mail_outline"></span>Inbox <span class="number">3</span></a>
-                    <a class="dropdown-item" href="#"><span class="icon icon-cog"></span>Setting<span>New</span></a>
                     <a class="dropdown-item" asp-controller="Auth" asp-action="LogOut"><span class="icon icon-sign-out"></span>Log out</a>
                 </div>
             </div>

@@ -1,8 +1,9 @@
 ﻿@model Online_Learning_Platform.ViewModels.CategoryViewModel
 
-@* @{
+@{
     ViewData["Title"] = "Edit Category";
-} *@
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
 
 <h1>Edit Category</h1>
 
@@ -30,8 +31,8 @@
     <a asp-action="Categories">Back to List</a>
 </div>
 
-@* @section Scripts {
+@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-} *@
+}

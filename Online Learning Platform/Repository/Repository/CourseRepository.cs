@@ -64,6 +64,7 @@ namespace Online_Learning_Platform.Repository.Repository
             return _context.Courses.Where(c => EF.Functions.Like(c.Title, $"%{name}%"));
         }
 
+
     }
 }
 

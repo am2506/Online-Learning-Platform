@@ -14,12 +14,17 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="card-title">@Model.Title</h1>
-                    <h5 class="card-subtitle mb-2 text-muted">Instructor: @Model.Instructor</h5>
+                    <h5 class="card-subtitle mb-2 text-muted">Instructor: @Model.Instructor.FirstName </h5>
                     <h2>Description</h2>
                     <p class="card-text">@Model.Description</p>
 
                     <h2>Course Video</h2>
-                    <iframe class="embed-responsive-item" src="@Model.ImageUrl" frameborder="0" allowfullscreen style="width: 100%; height: 400px;"></iframe>
+                    <iframe width="560" height="315" 
+                        src="https://www.youtube.com/embed/AhAxLiGC7Pc?si=e4icVECuJ7AjAOBB"
+                        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; 
+                            clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
                 </div>
             </div>
 
@@ -27,8 +32,6 @@
             <h2>Additional Information</h2>
             <ul class="list-group">
                 <li class="list-group-item">Duration: @Model.Duration</li>
-                
-                <li class="list-group-item">Enrollments: @Model.Lessons</li>
             </ul>
         </div>
     </div>

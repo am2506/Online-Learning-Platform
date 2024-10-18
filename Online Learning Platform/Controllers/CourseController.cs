@@ -75,7 +75,7 @@ namespace Online_Learning_Platform.Controllers
 
 		public async Task<IActionResult> Details(int Id)
 		{
-			var course = await _courseRepository.GetByIdAsync(Id);
+			var course = await _courseRepository.GetCourseById(Id);
 			if (course == null)
 			{
 				return NotFound();
