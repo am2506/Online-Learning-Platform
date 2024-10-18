@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Online_Learning_Platform.Models;
+using System.Linq.Expressions;
 
 namespace Online_Learning_Platform.Repository.Interfaces
 {
@@ -10,5 +11,7 @@ namespace Online_Learning_Platform.Repository.Interfaces
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
-    }
+
+
+	}
 }

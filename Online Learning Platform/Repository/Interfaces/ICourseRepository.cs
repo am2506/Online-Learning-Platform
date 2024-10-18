@@ -7,7 +7,7 @@ namespace Online_Learning_Platform.Repository.Interfaces
 {
     public interface ICourseRepository : IGenericRepository<Course>
     {
-        //Task<IEnumerable<Course>> GetAllCoursesAsync();
+        Task<IEnumerable<Course>> GetAllCoursesAsync();
 
         //Course GetCourseById (int id); 
 
