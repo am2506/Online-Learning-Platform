@@ -18,7 +18,7 @@
 					<div class="card">
 						<img class="card-img-top" src="@course.ImageUrl" alt="https://unsplash.com/kellybrito">
 						<div class="card-body text-center">
-							<div class="card-title"><a href="">@course.Title</a></div>
+							<div class="card-title"><a asp-Controller="Course" asp-action="Details" asp-route-Id="@course.Id">@course.Title</a></div>
 							<div class="card-text" style="height:5rem; overflow:hidden;" title="Hover to see full description">@course.Description</div>
 						</div>
 						

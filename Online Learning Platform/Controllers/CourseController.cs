@@ -72,6 +72,16 @@ namespace Online_Learning_Platform.Controllers
             var UserCourses = _courseRepository.CoursesOfUser(Id);
             return View(UserCourses);
         }
-    }
+
+		public async Task<IActionResult> Details(int Id)
+		{
+			var course = await _courseRepository.GetByIdAsync(Id);
+			if (course == null)
+			{
+				return NotFound();
+			}
+			return View("Details", course);
+		}
+	}
 
 }

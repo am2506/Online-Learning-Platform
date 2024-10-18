@@ -59,7 +59,6 @@ namespace Online_Learning_Platform.Repository.Repository
             return enrollments;
         }
 
-
         public IQueryable<Course> SearchByNameAsync(string name)
         {
             return _context.Courses.Where(c => EF.Functions.Like(c.Title, $"%{name}%"));
