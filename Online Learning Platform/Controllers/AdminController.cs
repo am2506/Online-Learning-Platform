@@ -5,8 +5,9 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Online_Learning_Platform.Models.ViewModels;
-using Online_Learning_Platform.ModelBL;
 using Online_Learning_Platform.ViewModels;
+using static Online_Learning_Platform.Helpers.DocumentSettings;
+
 
 public class AdminController : Controller
 {
@@ -80,6 +81,23 @@ public class AdminController : Controller
     }
 
     // Manage Courses
+    private void LoadCategoriesAndInstructors(CourseViewModel model)
+    {
+
+        model.Categories = _context.Categories.Select(c => new SelectListItem
+        {
+            Value = c.Id.ToString(),
+            Text = c.Name
+        }).ToList();
+
+        model.Instructors = _context.Users
+            .Where(u => u.RoleName == "Instructor")
+            .Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.UserName
+            }).ToList();
+    }
     public IActionResult Courses()
     {
         var courses = _context.Courses
@@ -98,31 +116,13 @@ public class AdminController : Controller
 
         return View(courses);
     }
-  
-    private void LoadCategoriesAndInstructors(CourseViewModel model)
-    {
-        
-        model.Categories = _context.Categories.Select(c => new SelectListItem
-        {
-            Value = c.Id.ToString(),
-            Text = c.Name
-        }).ToList();
-
-        model.Instructors = _context.Users
-            .Where(u => u.RoleName == "Instructor") 
-            .Select(u => new SelectListItem
-            {
-                Value = u.Id.ToString(),
-                Text = u.UserName 
-            }).ToList();
-    }
 
     [HttpGet]
     public IActionResult AddCourse()
     {
         var model = new CourseViewModel();
 
-      
+
         LoadCategoriesAndInstructors(model);
 
         return View(model);
@@ -134,11 +134,30 @@ public class AdminController : Controller
     {
         if (ModelState.IsValid)
         {
+            string imagePath = null;
+
+            // Check if an image file was uploaded
+            if (model.ImageFile != null)
+            {
+                // Generate a unique file name for the image and save it to wwwroot/images folder
+                var fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                var extension = Path.GetExtension(model.ImageFile.FileName);
+                fileName = $"{fileName}_{DateTime.Now:yyyyMMddHHmmss}{extension}";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(stream);
+                }
+
+                imagePath = "/images/" + fileName;  // Path for the image to be used in the view
+            }
+
             var course = new Course
             {
                 Title = model.Title,
                 Description = model.Description,
-                ImageUrl = model.ImageUrl,
+                ImageUrl = imagePath,
                 Duration = model.Duration,
                 TotalLecture = model.TotalLecture,
                 CategoryId = model.CategoryId,
@@ -151,22 +170,31 @@ public class AdminController : Controller
             return RedirectToAction("Courses");
         }
 
-        
-        LoadCategoriesAndInstructors(model);
-        return View(model);
+        // Add logging to check for validation errors
+        foreach (var value in ModelState.Values)
+        {
+            foreach (var error in value.Errors)
+            {
+                Console.WriteLine("Validation Error: " + error.ErrorMessage);
+            }
+        }
+
+        LoadCategoriesAndInstructors(model);  // Reload dropdowns if there are validation errors
+        return View(model);  // Re-display form with validation errors
     }
+
 
     [HttpGet]
     public IActionResult EditCourse(int id)
     {
-        // Find the course by id
+
         var course = _context.Courses.Find(id);
         if (course == null)
         {
             return NotFound();
         }
 
-        // Create a CourseViewModel and populate it with the course data
+
         var model = new CourseViewModel
         {
             Id = course.Id,
@@ -179,43 +207,58 @@ public class AdminController : Controller
             InstructorId = course.InstructorId
         };
 
-        // Load dropdown options for categories and instructors
         LoadCategoriesAndInstructors(model);
 
-        // Return the view with the model
         return View(model);
-    }
+    } 
+
     [HttpPost]
-    public IActionResult EditCourse(CourseViewModel course)
+    public IActionResult EditCourse(CourseViewModel model)
     {
         if (ModelState.IsValid)
         {
+            var course = _context.Courses.Find(model.Id);
 
-            var model = new Course
+            if (course == null)
             {
-                Id = course.Id,
-                Title = course.Title,
-                Description = course.Description,
-                ImageUrl = course.ImageUrl,
-                Duration = course.Duration,
-                TotalLecture = course.TotalLecture,
-                CategoryId = course.CategoryId,
-                InstructorId = course.InstructorId
-            };
-            _context.Courses.Update(model);
+                return NotFound();
+            }
+
+            string imagePath = course.ImageUrl;  // Preserve existing image path
+
+            // If a new image file was uploaded, save the new image and update the path
+            if (model.ImageFile != null)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                var extension = Path.GetExtension(model.ImageFile.FileName);
+                fileName = $"{fileName}_{DateTime.Now:yyyyMMddHHmmss}{extension}";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(stream);
+                }
+
+                imagePath = "/images/" + fileName;
+            }
+            // Update the course details
+            course.Title = model.Title;
+            course.Description = model.Description;
+            course.ImageUrl = imagePath;
+            course.Duration = model.Duration;
+            course.TotalLecture = model.TotalLecture;
+            course.CategoryId = model.CategoryId;
+            course.InstructorId = model.InstructorId;
+
+            _context.Courses.Update(course);
             _context.SaveChanges();
 
             return RedirectToAction("Courses");
         }
-    
 
-        // Load dropdown options for categories and instructors
-        LoadCategoriesAndInstructors(course);
-
-        // Return the view with the model
-        return View(course);
+        LoadCategoriesAndInstructors(model);
+        return View(model);
     }
-
 
     // Delete Course
     public IActionResult DeleteCourse(int id)

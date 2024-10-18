@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Repository\Repository\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
