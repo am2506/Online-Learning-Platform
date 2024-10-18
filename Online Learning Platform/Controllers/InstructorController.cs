@@ -15,8 +15,8 @@ namespace Online_Learning_Platform.Controllers
 
         public IActionResult GetInstructorInfo(int id)
 		{
-
-			return View(_instructorRepository.GetById(id));
+			var InstructorInfo = _instructorRepository.GetById(id);
+			return View(InstructorInfo);
 		}
 	}
 }
