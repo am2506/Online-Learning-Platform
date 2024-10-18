@@ -500,12 +500,23 @@ public class AdminController : Controller
     // View Enrollments by Course
     public IActionResult Enrollments(int courseId)
     {
-        var enrollments = _context.Enrollments;
-        //var enrollments = _context.Enrollments.Where(e => e.CourseId == courseId)
-        //                                      .Include(e => e.Student)
-        //                                      .ToList();
+        var enrollments = _context.Enrollments
+                                  .Include(e => e.Course)
+                                  .Include(e => e.Student)
+                                  .Select(e => new EnrollmentViewModel
+                                  {
+                                      EnrollmentId = e.Id,
+                                      CourseTitle = e.Course.Title,
+                                     // StudentUserName = e.Student.UserName,
+                                      Progress = e.Prograss,
+                                      EnrollmentDate = e.EnrollmentDate
+                                  })
+                                  .ToList();
+        LoadCoursesAndStudents();
+
         return View(enrollments);
     }
+
     private void LoadCoursesAndStudents()
     {
         var courses = _context.Courses.ToList() ?? new List<Course>();

@@ -124,6 +124,14 @@ namespace Online_Learning_Platform.Models.Data
                 new Course { Id = 2, Title = "Entity Framework", Description = "Learn EF Core", Duration = 8, TotalLecture = 16, CategoryId = 1, InstructorId = 2 },
                 new Course { Id = 3, Title = "JavaScript Basics", Description = "Learn JavaScript", Duration = 6, TotalLecture = 12, CategoryId = 1, InstructorId = 3 }
             );
+            // Seed 5 enrollments
+            builder.Entity<Enrollment>().HasData(
+                new Enrollment { Id = 1, CourseId = 1, StudentId = 4, Prograss = 50, EnrollmentDate = DateTime.Now.AddDays(-10) },
+                new Enrollment { Id = 2, CourseId = 2, StudentId = 5, Prograss = 70, EnrollmentDate = DateTime.Now.AddDays(-8) },
+                new Enrollment { Id = 3, CourseId = 3, StudentId = 6, Prograss = 30, EnrollmentDate = DateTime.Now.AddDays(-6) },
+                new Enrollment { Id = 4, CourseId = 1, StudentId = 5, Prograss = 80, EnrollmentDate = DateTime.Now.AddDays(-5) },
+                new Enrollment { Id = 5, CourseId = 2, StudentId = 6, Prograss = 90, EnrollmentDate = DateTime.Now.AddDays(-3) }
+            );
             //builder.Entity<UserBase>()
             //    .Property(u => u.RowVersion)
             //    .IsRowVersion(); // Mark as concurrency token
