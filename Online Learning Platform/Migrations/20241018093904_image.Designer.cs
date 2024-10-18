@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Learning_Platform.Models.Data;
 
@@ -11,9 +12,11 @@ using Online_Learning_Platform.Models.Data;
 namespace Online_Learning_Platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241018093904_image")]
+    partial class image
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,48 +300,6 @@ namespace Online_Learning_Platform.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Enrollments");
-
-                    b.HasData(
-                        new
-                        {
-                            StudentId = 4,
-                            CourseId = 1,
-                            EnrollmentDate = new DateTime(2024, 10, 8, 14, 44, 4, 606, DateTimeKind.Local).AddTicks(2180),
-                            Id = 1,
-                            Prograss = 50
-                        },
-                        new
-                        {
-                            StudentId = 5,
-                            CourseId = 2,
-                            EnrollmentDate = new DateTime(2024, 10, 10, 14, 44, 4, 606, DateTimeKind.Local).AddTicks(2320),
-                            Id = 2,
-                            Prograss = 70
-                        },
-                        new
-                        {
-                            StudentId = 6,
-                            CourseId = 3,
-                            EnrollmentDate = new DateTime(2024, 10, 12, 14, 44, 4, 606, DateTimeKind.Local).AddTicks(2325),
-                            Id = 3,
-                            Prograss = 30
-                        },
-                        new
-                        {
-                            StudentId = 5,
-                            CourseId = 1,
-                            EnrollmentDate = new DateTime(2024, 10, 13, 14, 44, 4, 606, DateTimeKind.Local).AddTicks(2462),
-                            Id = 4,
-                            Prograss = 80
-                        },
-                        new
-                        {
-                            StudentId = 6,
-                            CourseId = 2,
-                            EnrollmentDate = new DateTime(2024, 10, 15, 14, 44, 4, 606, DateTimeKind.Local).AddTicks(2467),
-                            Id = 5,
-                            Prograss = 90
-                        });
                 });
 
             modelBuilder.Entity("Online_Learning_Platform.Models.Lesson", b =>
@@ -451,11 +412,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a302e6f-e1f1-4c12-9d76-16fc641b69c6",
+                            ConcurrencyStamp = "88406e47-3400-439c-a0bb-2e4867bfef20",
                             Email = "instructor1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHBsaPbe2WxEbHZW2MIVu2puwTFrmu4JqJQF2zdU5dNeiW1qNJu9pXvDdTKeP4FGXQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGwW/M3oS7jEjqaGW8ECe82ZukTQwQ7/zzYEOu8rQoWBeYizzsRKDbBvUA0R7LQdRw==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
@@ -465,11 +426,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c087cccd-d783-4455-9724-fb22be3cc8a0",
+                            ConcurrencyStamp = "6d7f5ab5-c036-45ae-bd4e-48d12169f538",
                             Email = "instructor2@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEMmaGIvOm8WvkGdTpzPPLw8tcXdre/b3Jb0reublMhtWd2fx+qmkZ9geU2pKjst1Lg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMUlkkl6Sj6q89Ueo8U/Bu6qB5Li/i+bMJsCu1ewgNZQdL8CtKElJ9Xw1brkC4jUcA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
@@ -479,11 +440,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f7235288-5f1d-4c36-a85d-dec93eb2b158",
+                            ConcurrencyStamp = "11bffde5-de1a-47b3-9ed8-6e8dac594a09",
                             Email = "Student1@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxHIUdcyvankAnIagm3Az4vQ31KpGKndLjK5jR7ICV3u2En36wAifp0q68E7BZk0Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH3q/rA4BZ+ydr0rXyJPDT1nQcQ3Gdf6WHeWyxI/ccG0Lhugsdng//+obFrLgaJNmA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -493,11 +454,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "363b4dd2-ef5c-44c7-9bc9-fdb624540cc9",
+                            ConcurrencyStamp = "29878d53-4b95-4a74-aa46-fb47b4cd4fce",
                             Email = "Student2@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOCbZqvojTNfk+u/92bleekkn0viItPSnYFKd0/Ni3LL/+AkJVrrH0nB5APYG+ZqMA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGA7BDO5PHO8Gd959+0ttZGhgjHkvxKDpIp7n9ApFh4TM7hoOgXM+gvacodsUbTmNA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -507,11 +468,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39f826e1-860b-484a-9a44-60eb519efabc",
+                            ConcurrencyStamp = "958a0710-59d4-4de9-948f-e3e165d46855",
                             Email = "Student3@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEHZ1mEVadl5wWdaXScQKGt624ZaVPkb2dgv0CLiwSAGBANbVIvxIqNXE5GRSN1jwOw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI/ImwyZC3YSnf92BZ7U1bm3tmqCoy8Odd4y1G2A9Xv6Y4ifGvLBnQCm10q4dCWu1w==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Student",
                             TwoFactorEnabled = false,
@@ -521,11 +482,11 @@ namespace Online_Learning_Platform.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e466c3e6-21b0-4c31-a985-dc4f18308147",
+                            ConcurrencyStamp = "f6fb2f47-317b-4fcb-8646-a85b45788f9d",
                             Email = "instructor3@example.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEIgGq1EW3nSgrrfH5E4UMZmLVzJOOuI4mxS90M7FXlwOh6Cag7A+lNm0gzLhLmf6sQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENsgEmxBLdbYA5Lo2opnXaJztEm2lvWIQJ1Y9HF1UsHRVEwpG9N8z7IdsWxR8VLgEA==",
                             PhoneNumberConfirmed = false,
                             RoleName = "Instructor",
                             TwoFactorEnabled = false,
