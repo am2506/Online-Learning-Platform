@@ -13,11 +13,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //Console.WriteLine($"{builder.Configuration.GetConnectionString("DefaultConnection")}");
 
-
-// Configure Identity
+// Configure
 builder.Services.AddIdentity<UserBase, IdentityRole<int>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+
 var app = builder.Build();
 
 

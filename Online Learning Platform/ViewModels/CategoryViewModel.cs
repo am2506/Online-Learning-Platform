@@ -2,6 +2,10 @@
 {
     public class CategoryViewModel
     {
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
+
+        public int Id { get; set; }
+
+
     }
 }

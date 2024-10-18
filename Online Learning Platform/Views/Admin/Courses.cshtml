@@ -1,7 +1,6 @@
-﻿
+﻿@model IEnumerable<Online_Learning_Platform.ViewModels.CourseViewModel>
 
-@model List<Course>
-<h2>Courses</h2>
+<h2>Manage Courses</h2>
 
 <a asp-action="AddCourse" class="btn btn-primary">Add New Course</a>
 
@@ -10,7 +9,6 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
-            @* <th>Instructor</th> *@
             <th>Actions</th>
         </tr>
     </thead>
@@ -20,45 +18,15 @@
             <tr>
                 <td>@course.Title</td>
                 <td>@course.Description</td>
-                 @* <td>@course.Category</td> <!-- Showing Instructor's username -->  *@
-<td>
-    <a asp-action="EditCourse" asp-route-id="@course.Id" class="btn btn-warning">Edit</a>
-    <a asp-action="DeleteCourse" asp-route-id="@course.Id" class="btn btn-danger">Delete</a>
-</td>
-            </tr>
-        }
-    </tbody>
-</table>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
- 
- @* @model IEnumerable<Online_Learning_Platform.Models.Course>
-
-<h2>Manage Courses</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var course in Model)
-        {
-            <tr>
-                <td>@course.Title</td>
-                <td>@course.Description</td>
-                <td>@course.Instructor.RoleName</td>
                 <td>
-                    <a class="btn btn-warning" href="@Url.Action("EditCourse", new { id = course.Id })">Edit</a>
-                    <a class="btn btn-danger" href="@Url.Action("DeleteCourse", new { id = course.Id })">Delete</a>
+                    <a asp-action="EditCourse" asp-route-id="@course.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="DeleteCourse" asp-route-id="@course.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
- *@
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

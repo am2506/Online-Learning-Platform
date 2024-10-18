@@ -6,91 +6,271 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Online_Learning_Platform.Models.ViewModels;
 using Online_Learning_Platform.ModelBL;
-using Microsoft.AspNetCore.Identity;
 using Online_Learning_Platform.ViewModels;
 
 public class AdminController : Controller
 {
     private readonly ApplicationDbContext _context;
-    private readonly UserManager<UserBase> _userManager;
-
-    public AdminController(ApplicationDbContext context, UserManager<UserBase> userManager)
+    public AdminController(ApplicationDbContext context)
     {
         _context = context;
-       _userManager = userManager;
     }
-    //============= User Management =============
-    #region UserManagement
+
     // Admin Dashboard Home Page
+    //public async Task<IActionResult> Index()
+    //{
+    //    var dashboardData = new DashboardViewModel
+    //    {
+    //        TotalUsers = await _context.Users.CountAsync(),
+    //        TotalCourses = await _context.Courses.Include(c => c.Category).CountAsync(),
+    //        TotalEnrollments = await _context.Enrollments.CountAsync(),
+    //        TotalCategories = await _context.Categories.CountAsync(),
+    //    };
+
+    //    return View(dashboardData);
+    //}
     public async Task<IActionResult> Index()
     {
         var dashboardData = new DashboardViewModel
         {
+            // Summary data
             TotalUsers = await _context.Users.CountAsync(),
             TotalCourses = await _context.Courses.Include(c => c.Category).CountAsync(),
             TotalEnrollments = await _context.Enrollments.CountAsync(),
             TotalCategories = await _context.Categories.CountAsync(),
+
+            // Data for User Roles Chart
+            UserRoles = await _context.Users.GroupBy(u => u.RoleName)
+                .Select(g => g.Key).ToListAsync(),
+            RoleCounts = await _context.Users.GroupBy(u => u.RoleName)
+                .Select(g => g.Count()).ToListAsync(),
+
+            // Data for Courses by Category Chart
+            Categories = await _context.Courses.GroupBy(c => c.Category.Name)
+                .Select(g => g.Key).ToListAsync(),
+            CategoryCounts = await _context.Courses.GroupBy(c => c.Category.Name)
+                .Select(g => g.Count()).ToListAsync(),
+
+            // Data for Course Enrollment Counts
+            CourseTitles = await _context.Courses.Select(c => c.Title).ToListAsync(),
+            CourseEnrollmentCounts = await _context.Courses
+                .Select(c => c.Enrollments.Count).ToListAsync(),
+
+            // Data for Enrollment Trends by Date
+            EnrollmentDates = await _context.Enrollments
+                .GroupBy(e => e.EnrollmentDate.Date)
+                .Select(g => g.Key.ToShortDateString()).ToListAsync(),
+            DailyEnrollments = await _context.Enrollments
+                .GroupBy(e => e.EnrollmentDate.Date)
+                .Select(g => g.Count()).ToListAsync()
         };
 
         return View(dashboardData);
     }
 
+
+
+
+    #region Courses
+    // Load categories and instructors for the dropdown lists
+    private void LoadCategoriesAndInstructors()
+    {
+        ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
+        ViewBag.Instructors = new SelectList(_context.Instructors, "Id", "Name");
+    }
+
+    // Manage Courses
+    public IActionResult Courses()
+    {
+        var courses = _context.Courses
+            .Include(c => c.Category)
+            .Include(c => c.Instructor)
+            .Select(c => new CourseViewModel
+            {
+                Id = c.Id,
+                Title = c.Title,
+                Description = c.Description,
+                CategoryId = c.CategoryId,
+                InstructorId = c.InstructorId,
+                Duration = c.Duration,
+                TotalLecture = c.TotalLecture
+            }).ToList();
+
+        return View(courses);
+    }
+  
+    private void LoadCategoriesAndInstructors(CourseViewModel model)
+    {
+        
+        model.Categories = _context.Categories.Select(c => new SelectListItem
+        {
+            Value = c.Id.ToString(),
+            Text = c.Name
+        }).ToList();
+
+        model.Instructors = _context.Users
+            .Where(u => u.RoleName == "Instructor") 
+            .Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.UserName 
+            }).ToList();
+    }
+
+    [HttpGet]
+    public IActionResult AddCourse()
+    {
+        var model = new CourseViewModel();
+
+      
+        LoadCategoriesAndInstructors(model);
+
+        return View(model);
+    }
+
+
+    [HttpPost]
+    public IActionResult AddCourse(CourseViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var course = new Course
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Duration = model.Duration,
+                TotalLecture = model.TotalLecture,
+                CategoryId = model.CategoryId,
+                InstructorId = model.InstructorId
+            };
+
+            _context.Courses.Add(course);
+            _context.SaveChanges();
+
+            return RedirectToAction("Courses");
+        }
+
+        
+        LoadCategoriesAndInstructors(model);
+        return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult EditCourse(int id)
+    {
+        // Find the course by id
+        var course = _context.Courses.Find(id);
+        if (course == null)
+        {
+            return NotFound();
+        }
+
+        // Create a CourseViewModel and populate it with the course data
+        var model = new CourseViewModel
+        {
+            Id = course.Id,
+            Title = course.Title,
+            Description = course.Description,
+            ImageUrl = course.ImageUrl,
+            Duration = course.Duration,
+            TotalLecture = course.TotalLecture,
+            CategoryId = course.CategoryId,
+            InstructorId = course.InstructorId
+        };
+
+        // Load dropdown options for categories and instructors
+        LoadCategoriesAndInstructors(model);
+
+        // Return the view with the model
+        return View(model);
+    }
+    [HttpPost]
+    public IActionResult EditCourse(CourseViewModel course)
+    {
+        if (ModelState.IsValid)
+        {
+
+            var model = new Course
+            {
+                Id = course.Id,
+                Title = course.Title,
+                Description = course.Description,
+                ImageUrl = course.ImageUrl,
+                Duration = course.Duration,
+                TotalLecture = course.TotalLecture,
+                CategoryId = course.CategoryId,
+                InstructorId = course.InstructorId
+            };
+            _context.Courses.Update(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("Courses");
+        }
+    
+
+        // Load dropdown options for categories and instructors
+        LoadCategoriesAndInstructors(course);
+
+        // Return the view with the model
+        return View(course);
+    }
+
+
+    // Delete Course
+    public IActionResult DeleteCourse(int id)
+    {
+        var course = _context.Courses.Find(id);
+        if (course == null) return NotFound();
+
+        _context.Courses.Remove(course);
+        _context.SaveChanges();
+        return RedirectToAction("Courses");
+    }
+
+    #endregion
+    #region Users
     // List All Users
     public IActionResult Users()
     {
-        var users = _userManager.Users.ToList();
+        var users = _context.Users.ToList();
         return View(users);
     }
 
     // Add User
+
     [HttpGet]
-    public async Task<IActionResult> AddUser(int? id)
+    public IActionResult AddUser(int? id)
     {
         if (id == null)
         {
             return View(new UserBase()); // Empty UserBase for adding new user
         }
-        var user = await _userManager.FindByIdAsync(id.ToString());
+        var user = _context.Users.Find(id);
         if (user == null)
         {
             return NotFound();
         }
         return View(user);
     }
+
     [HttpPost]
-    public async Task<IActionResult> AddUser(AddUserViewModel user)
+    public IActionResult AddUser(UserBase user)
     {
         if (ModelState.IsValid)
         {
-            var userExists = _userManager.FindByEmailAsync(user.Email);
-            if (userExists != null)
+            var users = _context.Users.ToList(); // Load all users
+
+            if (user.Id == 0)
             {
-                ModelState.AddModelError("Email", "Email already exists");
-                return View(user);
+                _context.Users.Add(user); // Create new user
             }
-            var NewUser = new UserBase
+            else
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                RoleName = user.RoleName
-            };
-            try
-            {
-                var Result = await _userManager.CreateAsync(NewUser, user.Password);
-                if (Result.Succeeded)
-                {
-                    Result = await _userManager.AddToRoleAsync(NewUser, user.RoleName);
-                }
+                _context.Users.Update(user); // Edit existing user
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", ex.Message);
-                return View(user);
-            }
-          
-            
-            return RedirectToAction("Users");
+            _context.SaveChanges();
+            return RedirectToAction("Users", users);
         }
 
         return View(user);
@@ -132,6 +312,9 @@ public class AdminController : Controller
 
         return View(user);
     }
+
+
+
     // Delete User
     public IActionResult DeleteUser(int id)
     {
@@ -144,190 +327,133 @@ public class AdminController : Controller
     }
     #endregion
 
-    //============= Course Management =============
-    #region Course Management
-    // Manage Courses
-    public IActionResult Courses()
-    {
-        //var courses = _context.Courses.Include(c => c.Category).Include(c => c.Instructor).ToList();
-
-        var courses = _context.Courses.ToList();
-        return View(courses);
-    }
-    // Add Course
-    [HttpGet]
-    public IActionResult AddCourse(int? id)
-    {
-        LoadCategoriesAndInstructors();  // Ensure dropdowns are populated
-
-        if (id == null)
-        {
-            return View(new Course()); // Return empty course for creation
-        }
-
-        var course = _context.Courses.Find(id);
-        if (course == null)
-        {
-            return NotFound();
-        }
-
-        return View(course);
-    }
-
-    [HttpPost]
-    public IActionResult AddCourse(Course course)
-    {
-        if (ModelState.IsValid)
-        {
-
-            if (course.Id == 0)
-            {
-                _context.Courses.Add(course); // Add new course
-            }
-            else
-            {
-                _context.Courses.Update(course); // Update existing course
-            }
-            _context.SaveChanges();
-            return RedirectToAction("Courses");
-        }
-
-        LoadCategoriesAndInstructors();  // Reload dropdowns in case of validation error
-        return View(course);
-    }
-
-    [HttpGet]
-    public IActionResult EditCourse(int? id)
-    {
-        if (id == null) return NotFound();
-
-        var course = _context.Courses.Find(id);
-        if (course == null) return NotFound();
-
-        LoadCategoriesAndInstructors();
-        return View(course);
-    }
-
-    // Similarly for EditCourse
-    [HttpPost]
-    public IActionResult EditCourse(Course course)
-    {
-        if (ModelState.IsValid)
-        {
-            _context.Courses.Update(course);
-            _context.SaveChanges();
-            return RedirectToAction("Courses");
-        }
-
-        LoadCategoriesAndInstructors();  // Reload dropdowns in case of validation error
-        return View(course);
-    }
-    // Delete Course
-    public IActionResult DeleteCourse(int id)
-    {
-        var course = _context.Courses.Find(id);
-        if (course == null) return NotFound();
-
-        _context.Courses.Remove(course);
-        _context.SaveChanges();
-        return RedirectToAction("Courses");
-    }
-    #endregion
-
-    //============= Category Management =============
-    #region Category Management
+    #region Categories
     // Manage Categories
     public IActionResult Categories()
     {
-        var categories = _context.Categories.ToList();
+        var categories = _context.Categories
+            .Select(c => new CategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToList();
+
         return View(categories);
     }
+
     [HttpGet]
     public IActionResult AddCategory(int? id)
     {
         if (id == null)
         {
-            return View(new Category()); // Empty UserBase for adding new user
+            return View(new CategoryViewModel()); // Empty model for adding a new category
         }
-        var Category = _context.Categories.Find(id);
-        if (Category == null)
+
+        var category = _context.Categories.Find(id);
+        if (category == null)
         {
             return NotFound();
         }
-        return View(Category);
+
+        var model = new CategoryViewModel
+        {
+            Id = category.Id,
+            Name = category.Name
+        };
+
+        return View(model);
     }
 
     [HttpPost]
-    public IActionResult AddCategory(Category category)
+    public IActionResult AddCategory(CategoryViewModel model)
     {
         if (ModelState.IsValid)
         {
-            if (category.Id == 0)
+            if (model.Id == 0)
             {
-                _context.Categories.Add(category); // Create new category
+                var newCategory = new Category
+                {
+                    Name = model.Name
+                };
+
+                _context.Categories.Add(newCategory);
             }
             else
             {
-                _context.Categories.Update(category); // Edit existing category
+                var existingCategory = _context.Categories.Find(model.Id);
+                if (existingCategory == null)
+                {
+                    return NotFound();
+                }
+
+                existingCategory.Name = model.Name;
+                _context.Categories.Update(existingCategory);
             }
 
             _context.SaveChanges();
 
-            // Redirect to prevent form resubmission
-            return RedirectToAction("Categories"); // Redirect to the list of categories
+            return RedirectToAction("Categories");
         }
 
-        return View(category); // If validation fails, return the same view with errors
+        return View(model);
     }
 
-    // Edit Category
     [HttpGet]
     public async Task<IActionResult> EditCategory(int id)
     {
-        var Category = await _context.Categories.FindAsync(id);
-        if (Category == null)
+        var category = await _context.Categories.FindAsync(id);
+        if (category == null)
         {
             return NotFound();
         }
-        return View(Category);
+
+        var model = new CategoryViewModel
+        {
+            Id = category.Id,
+            Name = category.Name
+        };
+
+        return View(model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditCategory(Category Category)
+    public async Task<IActionResult> EditCategory(CategoryViewModel model)
     {
         if (ModelState.IsValid)
         {
-            var existingCategory = await _context.Categories.FindAsync(Category.Id);
-            if (existingCategory == null)
+            var category = await _context.Categories.FindAsync(model.Id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            // Update properties
-            existingCategory.Name = Category.Name;
+            category.Name = model.Name;
 
-
-            _context.Categories.Update(existingCategory);
+            _context.Categories.Update(category);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Categories");
         }
 
-        return View(Category);
+        return View(model);
     }
-    // Delete User
+
     public IActionResult DeleteCategory(int id)
     {
-        var Category = _context.Categories.Find(id);
-        if (Category == null) return NotFound();
+        var category = _context.Categories.Find(id);
+        if (category == null)
+        {
+            return NotFound();
+        }
 
-        _context.Categories.Remove(Category);
+        _context.Categories.Remove(category);
         _context.SaveChanges();
         return RedirectToAction("Categories");
     }
+
     #endregion
-    //============= Enrollment Management =============
-    #region EnrollmentManagement
+    #region Enrollments
     // View Enrollments by Course
     public IActionResult Enrollments(int courseId)
     {
@@ -337,8 +463,14 @@ public class AdminController : Controller
         //                                      .ToList();
         return View(enrollments);
     }
+    private void LoadCoursesAndStudents()
+    {
+        var courses = _context.Courses.ToList() ?? new List<Course>();
+        var students = _context.Students.ToList() ?? new List<Student>();
 
-
+        ViewBag.Courses = new SelectList(courses, "Id", "CourseName");
+        ViewBag.Students = new SelectList(students, "Id", "FullName");
+    }
     [HttpGet]
     public IActionResult AddEnrollment()
     {
@@ -390,28 +522,11 @@ public class AdminController : Controller
         _context.SaveChanges();
         return RedirectToAction("Enrollments", new { courseId = enrollment.CourseId });
     }
-
     #endregion
 
-
-
-    // Helper function to load Categories and Instructors for the views
-    private void LoadCoursesAndStudents()
-    {
-        var courses = _context.Courses.ToList() ?? new List<Course>();
-       //var students = _context.Students.ToList() ?? new List<Student>();
-
-        ViewBag.Courses = new SelectList(courses, "Id", "CourseName");
-       // ViewBag.Students = new SelectList(students, "Id", "FullName");
-    }
-    private void LoadCategoriesAndInstructors()
-    {
-        var categories = _context.Categories.ToList() ?? new List<Category>();
-        //var instructors = _context.Instructors.ToList() ?? new List<Instructor>();
-
-        ViewBag.Categories = new SelectList(categories, "Id", "Name");
-        //ViewBag.Instructors = new SelectList(instructors, "Id", "Name");
-    }
+    
+   
 
 
 }
+
